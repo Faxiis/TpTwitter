@@ -16,34 +16,36 @@ include "vue_entete.php";
     <div class="container">
         <h1>Inscription</h1>
 
-        <div class="result-box">
-            <!-- Identifiant -->
-            <div class="input-box">
-                <label for="identifiant">Identifiant :</label>
-                <input type="text" id="identifiant" name="identifiant" placeholder="Choisissez un identifiant">
-            </div>
-            
-            <br>
+        <!-- Formulaire pour l'inscription -->
+        <form action="inscription.php" method="post">
 
-            <!-- Mot de passe et confirmation dans le même rectangle -->
-            <div class="input-box password-box">
-                <div class="field-group">
-                    <label for="motdepasse">Mot de passe :</label>
-                    <input type="password" id="motdepasse" name="motdepasse" placeholder="Mot de passe">
+            <div class="result-box">
+                <!-- Identifiant -->
+                <div class="input-box">
+                    <label for="identifiant">Identifiant :</label>
+                    <input type="text" id="identifiant" name="identifiant" placeholder="Choisissez un identifiant" required>
                 </div>
 
-                <div class="field-group">
-                    <label for="confirmation">Confirmation :</label>
-                    <input type="password" id="confirmation" name="confirmation" placeholder="Confirmez le mot de passe">
+                <!-- Mot de passe et confirmation dans le même rectangle -->
+                <div class="input-box password-box">
+                    <div class="field-group">
+                        <label for="motdepasse">Mot de passe :</label>
+                        <input type="password" id="motdepasse" name="motdepasse" placeholder="Mot de passe" required>
+                    </div>
+
+                    <div class="field-group">
+                        <label for="confirmation">Confirmation :</label>
+                        <input type="password" id="confirmation" name="confirmation" placeholder="Confirmez le mot de passe" required>
+                    </div>
+                </div>
+
+                <!-- Bouton de soumission -->
+                <div class="submit-btn">
+                    <button type="submit" id="submitButton">S'inscrire</button>
                 </div>
             </div>
 
-            <!-- Bouton de soumission -->
-            <div class="submit-btn">
-                <button id="submitButton">S'inscrire</button>
-            </div>
-        </div>
-
+        </form>
     </div>
 </body>
 </html>

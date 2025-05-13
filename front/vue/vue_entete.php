@@ -17,15 +17,23 @@
         </div>
 
         <div class="date-section">
-            <?php echo date('d/m/Y'); ?>
-        </div>
+    <?php 
+        $jours = array("dimanche", "lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi");
+        $mois = array("janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août", "septembre", "octobre", "novembre", "décembre");
+
+        echo ucfirst($jours[date('w')]) . ' ' . date('d') . ' ' . ucfirst($mois[date('n') - 1]) . ' ' . date('Y');
+    ?>
+</div>
 
         <div class="nav-buttons">
     <?php
     if (isset($_SESSION['idUtilisateur'])) {
-        echo '<a href="index.php?section=profil_Utilisateur" class="cta"><button class="btnnav"><i class="bx bxs-user-circle" id="iconUser"></i>' . $_SESSION['prenomAdh'] . ' ' . $_SESSION['nomAdh'] . '</button></a>';
+        // Afficher le bouton Mon compte avec le nom d'utilisateur
+        echo '<a href="index.php?section=profil_Utilisateur" class="cta"><button class="btnnav"><i class="bx bxs-user-circle" id="iconUser"></i> Mon compte ' . $_SESSION['nomUti'] . '</button></a>';
+        // Afficher le bouton de déconnexion
         echo '<a href="index.php?section=deconnexion" class="cta"><button class="btnnav">Déconnexion</button></a>';
     } else {
+        // Si l'utilisateur n'est pas connecté, afficher les boutons d'inscription et de connexion
         echo "<a href='index.php?section=Inscription' class='cta'><button class='btnnav'>Inscription</button></a>";
         echo "<span class='separator'>/</span>";
         echo "<a href='index.php?section=SeConnecter' class='cta'><button class='btnnav'>Connexion à mon compte</button></a>";

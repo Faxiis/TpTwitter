@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Connexion{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+{% endblock %}
+
+{% block body %}
+
+<div class="header">
+    <div class="logo">RÉSEAU IIA</div>
+    <div class="date">
+        {% set jours = ['dimanche', 'lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi'] %}
+        {% set mois = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'] %}
+        {{ jours[date().format('w')]|capitalize }} {{ date().format('d') }} {{ mois[date().format('n') - 1]|capitalize }} {{ date().format('Y') }}
+    </div>
+<div class="auth-buttons">
+        <a href="{{ path('app_Connexion') }}">
+        <button class="btn">Se connecter</button>
+        </a>
+        <a href="{{ path('app_Inscription') }}">
+        <button class="btn">Inscription</button>
+        </a>
+    </div>
+</div>
+
+<div class="example-wrapper">
+    <h1>Connexion</h1>
+
+    <div class="form-wrapper">
+        <h2>Connexion à mon compte</h2>
+
+        <form method="post" action="#">
+            <div class="form-group">
+                <label for="identifiant">Identifiant</label>
+                <input type="text" id="identifiant" name="identifiant" required>
+                <div class="error-message" style="display:none;">Erreur: Identifiant invalide</div>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Mot de passe</label>
+                <input type="password" id="password" name="password" required>
+                <div class="error-message" style="display:none;">Erreur: Mot de passe invalide</div>
+            </div>
+            <button type="submit">Valider</button>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

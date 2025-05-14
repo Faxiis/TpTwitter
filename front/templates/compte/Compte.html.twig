@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Compte{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+{% endblock %}
+
+{% block body %}
+<div class="header">
+    <div class="logo">RÉSEAU IIA</div>
+    <div class="date">
+        {% set jours = ['dimanche', 'lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi'] %}
+        {% set mois = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'] %}
+        {{ jours[date().format('w')]|capitalize }} {{ date().format('d') }} {{ mois[date().format('n') - 1]|capitalize }} {{ date().format('Y') }}
+    </div>
+    <div class="auth-buttons">
+        <a href="{{ path('app_Connexion') }}">
+            <button class="btn">Se connecter</button>
+        </a>
+        <a href="{{ path('app_Inscription') }}">
+            <button class="btn">Inscription</button>
+        </a>
+    </div>
+</div>
+
+<div class="example-wrapper">
+    <h1>Mon Compte</h1>
+
+    <div class="form-wrapper">
+        <h2>Mettre à jour ma photo de profil</h2>
+
+        <form method="POST" action="#" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="photo">Choisir une photo</label>
+                <input type="file" id="photo" name="photo" accept="image/*" required>
+            </div>
+            <button type="submit">Enregistrer</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

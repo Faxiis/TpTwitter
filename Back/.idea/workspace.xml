@@ -5,15 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5326b0a9-3d45-46e4-9a65-66f9f20ae477" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../front/template/base.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../front/vue/inscription.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../front/vue/vue_compte.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../front/vue/vue_pageCompte.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../front/vue/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/../front/vue/css/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../front/vue/vue_accueil.php" beforeDir="false" afterPath="$PROJECT_DIR$/../front/vue/vue_accueil.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../front/vue/vue_entete.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../front/vue/vue_inscription.php" beforeDir="false" afterPath="$PROJECT_DIR$/../front/vue/vue_seConnecter.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -124,7 +116,7 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "Merging back-dev",
+    "git-widget-placeholder": "back-dev",
     "last_opened_file_path": "C:/Users/antho/Documents/M1_PHP_AVANCE/TpTwitter/Back",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",

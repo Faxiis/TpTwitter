@@ -10,18 +10,19 @@ include "vue_entete.php";
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PageCompte</title>
-    <link rel="stylesheet" href="vue/css/style.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <div class="container">
+          <table>
+            <tr>
         <h1>Page de <?php /*echo $_SESSION['nomUtilisateur']; */?></h1> <!-- Affichage dynamique du nom d'utilisateur -->
 
-        <div class="content">
-            <!-- Formulaire pour l'ajout d'information à gauche -->
-            <div class="left-section">
-                <form action="traitement.php" method="post"> <!-- Remplacer "traitement.php" par ton script PHP qui gère les informations -->
-                    <div class="result-box">
-                        <!-- Identifiant ou autre information -->
+      
+                <!-- Première colonne: Titre et input -->
+                <td style="text-align:left;">
+                    <form action="traitement.php" method="post">
+                        <!-- Ajouter une info -->
                         <div class="input-box">
                             <label for="info">Ajouter une info :</label>
                             <input type="text" id="info" name="info" placeholder="" required>
@@ -30,26 +31,25 @@ include "vue_entete.php";
                         <div class="submit-btn">
                             <button type="submit" id="submitButton">Valider</button>
                         </div>
-                    </div>
-                </form>
-            </div>
+                    </form>
+                </td>
 
-            <!-- Photo de l'utilisateur à droite -->
-            <div class="right-section">
-                <?php
-                    // Remplace cette condition par celle qui récupère l'URL de la photo de l'utilisateur
-                    $photoPath = 'path/to/user/photo.jpg'; // Remplacer par la logique de récupération de la photo
+                <!-- Deuxième colonne: Photo de l'utilisateur -->
+                <td class="right-section" style="text-align:center;">
+                    <?php
+                        $photoPath = 'path/to/user/photo.jpg'; // Remplacer par la logique de récupération de la photo
 
-                    // Si l'utilisateur a une photo
-                    if (file_exists($photoPath) && !empty($photoPath)) {
-                        echo "<img src='$photoPath' alt='Photo de profil' class='profile-photo'>";
-                    } else {
-                        // Si pas de photo, afficher un carré bleu avec le texte "Photo"
-                        echo "<div class='no-photo'>Photo</div>";
-                    }
-                ?>
-            </div>
-        </div>
+                        // Si l'utilisateur a une photo
+                        if (file_exists($photoPath) && !empty($photoPath)) {
+                            echo "<img src='$photoPath' alt='Photo de profil' class='profile-photo'>";
+                        } else {
+                            // Si pas de photo, afficher un carré bleu avec le texte "Photo"
+                            echo "<div class='no-photo'>Photo</div>";
+                        }
+                    ?>
+                </td>
+            </tr>
+        </table>
     </div>
 </body>
 </html>

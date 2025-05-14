@@ -262,11 +262,12 @@ h1 {
     border-radius: 50%; /* Rendre l'image ronde */
     object-fit: cover; /* Pour que l'image s'adapte sans déformation */
     border: 2px solid #ddd; /* Bordure autour de l'image */
+    padding: 20px 0;
 }
 
 /* Style pour le cas où il n'y a pas de photo */
 .no-photo {
-    width: 150px; /* Même taille que l'image */
+    width: 500px; /* Même taille que l'image */
     height: 150px; /* Même hauteur */
     background-color: #003366; /* Bleu foncé */
     color: white; /* Texte blanc */
@@ -293,11 +294,17 @@ content {
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-left: 30px;
 }
 /* Styles généraux pour la photo de profil */
 .profile-photo {
-    width: 150px; /* Taille de l'image */
-    height: 150px; /* Hauteur de l'image */
-    object-fit: cover; /* Pour que l'image s'adapte sans déformation */
-    border: 2px solid #ddd; /* Bordure autour de l'image */
+            width: 150px; /* Définir la largeur de l'image */
+            height: 150px; /* Définir la hauteur de l'image */
+            object-fit: cover; /* Cela permet de conserver les proportions sans déformation */
+            border-radius: 10px; /* Arrondir les coins de l'image */
+        }
+table {
+    width: 100%;
+    border-spacing: 20px; /* Espace de 20px entre les colonnes */
+    
 }

@@ -24,7 +24,7 @@ class TweetController extends AbstractController
         $this->em = $em;
     }
 
-    #[Route('/tweet', name: 'app_tweet_all', methods: ['GET'])]
+    #[Route('/api/tweet', name: 'app_tweet_all', methods: ['GET'])]
     public function getAll(): JsonResponse
     {
         $tweets = $this->tweetRepository->findAll();
@@ -44,7 +44,7 @@ class TweetController extends AbstractController
         return $this->json($data);
     }
 
-    #[Route('/tweet/{id}', name: 'app_tweet_by_id', methods: ['GET'])]
+    #[Route('/api/tweet/{id}', name: 'app_tweet_by_id', methods: ['GET'])]
     public function getById(int $id): JsonResponse
     {
         $tweet = $this->tweetRepository->find($id);
@@ -61,7 +61,7 @@ class TweetController extends AbstractController
         return $this->json($data);
     }
 
-    #[Route('/tweet/user/{userId}', name: 'app_tweet_by_user', methods: ['GET'])]
+    #[Route('/api/tweet/user/{userId}', name: 'app_tweet_by_user', methods: ['GET'])]
     public function getByUserId(int $userId): JsonResponse
     {
         // Récupération de l'utilisateur
@@ -87,7 +87,7 @@ class TweetController extends AbstractController
         return $this->json($data);
     }
 
-    #[Route('/tweet', name: 'app_create_tweet', methods: ['POST'])]
+    #[Route('/api/tweet', name: 'app_create_tweet', methods: ['POST'])]
     public function create(Request $request): JsonResponse
     {
         // Récupération de la requête
@@ -99,10 +99,7 @@ class TweetController extends AbstractController
 
         $tweet = new Tweet();
         $tweet->setContent($content);
-
-        // Pour test postman
-       // $tweet->setUsr($this->getUser());
-        $tweet->setUsr($this->userRepository->findOneBy(['username' => "testuser"]));
+        $tweet->setUsr($this->getUser());
 
         // Enregistrez le tweet
         $this->em->persist($tweet);
@@ -111,7 +108,7 @@ class TweetController extends AbstractController
         return $this->json(['message' => 'Tweet created successfully']);
     }
 
-    #[Route('/tweet/{id}', name: 'app_update_tweet', methods: ['PUT'])]
+    #[Route('/api/tweet/{id}', name: 'app_update_tweet', methods: ['PUT'])]
     public function update(int $id, Request $request): JsonResponse
     {
         $tweet = $this->tweetRepository->find($id);
@@ -121,8 +118,7 @@ class TweetController extends AbstractController
 
         // Vérifiez si l'utilisateur est le propriétaire du tweet
         $user = $this->userRepository->findOneBy(['username' => "testuser"]);
-        //if ($tweet->getUsr() !== $this->getUser())
-        if ($tweet->getUsr() !== $user)
+        if ($tweet->getUsr() !== $this->getUser())
             return $this->json(['error' => 'You are not authorized to update this tweet'], 403);
 
         // Récupération de la requête
@@ -139,7 +135,7 @@ class TweetController extends AbstractController
         return $this->json(['message' => 'Tweet updated successfully']);
     }
 
-    #[Route('/tweet/{id}', name: 'app_delete_tweet', methods: ['DELETE'])]
+    #[Route('/api/tweet/{id}', name: 'app_delete_tweet', methods: ['DELETE'])]
     public function delete(int $id): JsonResponse
     {
         $tweet = $this->tweetRepository->find($id);
@@ -158,7 +154,7 @@ class TweetController extends AbstractController
         return $this->json(['message' => 'Tweet deleted successfully']);
     }
 
-    #[Route('/tweet/like/{id}', name: 'app_like_tweet', methods: ['POST'])]
+    #[Route('/api/tweet/like/{id}', name: 'app_like_tweet', methods: ['POST'])]
     public function like(int $id): JsonResponse
     {
         $tweet = $this->tweetRepository->find($id);
@@ -169,8 +165,7 @@ class TweetController extends AbstractController
         $user = $this->userRepository->findOneBy(['username' => "testuser"]);
 
         // Vérifiez si l'utilisateur a déjà aimé le tweet
-        //if ($tweet->getLikes()->contains($this->getUser()))
-        if ($tweet->getLikes()->contains($user))
+        if ($tweet->getLikes()->contains($this->getUser()))
             return $this->json(['error' => 'You have already liked this tweet'], 400);
 
         // Ajoutez l'utilisateur à la liste des likes

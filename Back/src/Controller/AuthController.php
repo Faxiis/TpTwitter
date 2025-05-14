@@ -46,25 +46,4 @@ class AuthController extends AbstractController
         return $this->json(['message' => 'User registered successfully']);
     }
 
-    #[Route('/login', name: 'app_login', methods: ['POST'])]
-    public function login(Request $request): JsonResponse
-    {
-        // Récupération de la requête
-        $data = json_decode($request->getContent(), true);
-        $username = $data['username'] ?? null;
-        $password = $data['password'] ?? null;
-
-        // Vérifiez si l'utilisateur existe déjà
-        if (!$this->userRepository->findOneBy(['username' => $username])) {
-            return $this->json(['error' => 'Wrong username or password'], 400);
-        }
-
-        // Vérifiez le mot de passe
-        $user = $this->userRepository->findOneBy(['username' => $username]);
-        if (!$this->passwordHasher->isPasswordValid($user, $password, null, null)) {
-            return $this->json(['error' => 'Wrong username or password'], 400);
-        }
-
-        return $this->json(['message' => 'User logged successfully']);
-    }
 }

@@ -1,0 +1,51 @@
+nelmio_api_doc:
+    documentation:
+        info:
+            title: Twitter2
+            description: This is insane Twitter2 !
+            version: 1.0.0
+
+        security:
+            - Bearer: [ ]
+
+        components:
+            securitySchemes:
+                Bearer:
+                    type: http
+                    scheme: bearer
+                    bearerFormat: JWT
+
+        paths:
+            /api/login:
+                post:
+                    tags: [ Authentication ]
+                    summary: Authenticate user and retrieve JWT token
+                    requestBody:
+                        required: true
+                        content:
+                            application/json:
+                                schema:
+                                    type: object
+                                    properties:
+                                        username:
+                                            type: string
+                                            example: testuser
+                                        password:
+                                            type: string
+                                            example: password123
+                    responses:
+                        '200':
+                            description: JWT token returned
+                            content:
+                                application/json:
+                                    schema:
+                                        type: object
+                                        properties:
+                                            token:
+                                                type: string
+                        '401':
+                            description: Invalid credentials
+
+    areas: # to filter documented areas
+        path_patterns:
+            - ^/api(?!/doc$) # Accepts routes under /api except /api/doc

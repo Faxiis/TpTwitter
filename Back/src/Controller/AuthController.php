@@ -19,7 +19,7 @@ class AuthController extends AbstractController
         private UserPasswordHasherInterface $passwordHasher
     ) {}
 
-    #[Route('/register', name: 'app_register', methods: ['POST'])]
+    #[Route('/api/register', name: 'app_register', methods: ['POST'])]
     public function register(Request $request): JsonResponse
     {
         // Récupération de la requête

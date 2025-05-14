@@ -10,19 +10,16 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class TweetController extends AbstractController
 {
-    private $tweetRepository;
-    private $em;
-    private $userRepository;
-
-    public function __construct(TweetRepository $tweetRepository, UserRepository $userRepository, EntityManagerInterface $em)
-    {
-        $this->tweetRepository = $tweetRepository;
-        $this->userRepository = $userRepository;
-        $this->em = $em;
-    }
+    public function __construct(
+        private TweetRepository $tweetRepository,
+        private UserRepository $userRepository,
+        private EntityManagerInterface $em,
+        private ValidatorInterface $validator)
+    { }
 
     #[Route('/api/tweet', name: 'app_tweet_all', methods: ['GET'])]
     public function getAll(): JsonResponse
@@ -30,7 +27,7 @@ class TweetController extends AbstractController
         $tweets = $this->tweetRepository->findAll();
 
         if (!$tweets)
-            return $this->json(['error' => 'No tweets found'], 404);
+            return $this->json(['error' => 'Aucun tqeet trouvé'], 404);
 
         $data = [];
         foreach ($tweets as $tweet) {
@@ -49,7 +46,7 @@ class TweetController extends AbstractController
     {
         $tweet = $this->tweetRepository->find($id);
         if (!$tweet)
-            return $this->json(['error' => 'Tweet not found'], 404);
+            return $this->json(['error' => 'Tweet introuvable'], 404);
 
         $data[] = [
             'id' => $tweet->getId(),
@@ -67,12 +64,12 @@ class TweetController extends AbstractController
         // Récupération de l'utilisateur
         $user = $this->userRepository->find($userId);
         if (!$user)
-            return $this->json(['error' => 'User not found'], 404);
+            return $this->json(['error' => 'Utilisateur introuvable'], 404);
 
         // Récupération des tweets de l'utilisateur
         $tweets = $this->tweetRepository->findBy(['usr' => $user]);
         if (!$tweets)
-            return $this->json(['error' => 'No tweets found for this user'], 404);
+            return $this->json(['error' => 'Aucun tweet trouvé pour cet utilisateur'], 404);
 
         $data = [];
         foreach ($tweets as $tweet) {
@@ -92,20 +89,24 @@ class TweetController extends AbstractController
     {
         // Récupération de la requête
         $data = json_decode($request->getContent(), true);
-        $content = $data['content'] ?? null;
-
-        if (!$content)
-            return $this->json(['error' => 'Content is required'], 400);
-
         $tweet = new Tweet();
-        $tweet->setContent($content);
+        $tweet->setContent($data['content'] ?? '');
         $tweet->setUsr($this->getUser());
+
+        $errors = $this->validator->validate($tweet);
+        if (count($errors) > 0) {
+            $errorMessages = [];
+            foreach ($errors as $error) {
+                $errorMessages[] = $error->getPropertyPath() . ' : ' . $error->getMessage();
+            }
+            return $this->json(['errors' => $errorMessages], 400);
+        }
 
         // Enregistrez le tweet
         $this->em->persist($tweet);
         $this->em->flush();
 
-        return $this->json(['message' => 'Tweet created successfully']);
+        return $this->json(['message' => 'Tweet créé avec succès']);
     }
 
     #[Route('/api/tweet/{id}', name: 'app_update_tweet', methods: ['PUT'])]
@@ -114,25 +115,25 @@ class TweetController extends AbstractController
         $tweet = $this->tweetRepository->find($id);
 
         if (!$tweet)
-            return $this->json(['error' => 'Tweet not found'], 404);
+            return $this->json(['error' => 'Tweet introuvable'], 404);
 
         // Vérifiez si l'utilisateur est le propriétaire du tweet
         $user = $this->userRepository->findOneBy(['username' => "testuser"]);
         if ($tweet->getUsr() !== $this->getUser())
-            return $this->json(['error' => 'You are not authorized to update this tweet'], 403);
+            return $this->json(['error' => 'Vous n\'êtes pas propriétaire du tweet, impossible de le modifier'], 403);
 
         // Récupération de la requête
         $data = json_decode($request->getContent(), true);
         $content = $data['content'] ?? null;
 
         if (!$content)
-            return $this->json(['error' => 'Content is required'], 400);
+            return $this->json(['error' => 'Le contenu du tweet est obligatoire'], 400);
 
         // Mettez à jour le contenu du tweet
         $tweet->setContent($content);
         $this->em->flush();
 
-        return $this->json(['message' => 'Tweet updated successfully']);
+        return $this->json(['message' => 'Tweet modifié avec succès']);
     }
 
     #[Route('/api/tweet/{id}', name: 'app_delete_tweet', methods: ['DELETE'])]
@@ -141,17 +142,17 @@ class TweetController extends AbstractController
         $tweet = $this->tweetRepository->find($id);
 
         if (!$tweet)
-            return $this->json(['error' => 'Tweet not found'], 404);
+            return $this->json(['error' => 'Tweet introuvable'], 404);
 
         // Vérifiez si l'utilisateur est le propriétaire du tweet
         if ($tweet->getUsr() !== $this->getUser())
-            return $this->json(['error' => 'You are not authorized to delete this tweet'], 403);
+            return $this->json(['error' => 'Vous n\'êtes pas propriétaire du tweet, impossible de le supprimer'], 403);
 
         // Supprimez le tweet
         $this->em->remove($tweet);
         $this->em->flush();
 
-        return $this->json(['message' => 'Tweet deleted successfully']);
+        return $this->json(['message' => 'Tweet supprimé avec succès']);
     }
 
     #[Route('/api/tweet/like/{id}', name: 'app_like_tweet', methods: ['POST'])]
@@ -160,18 +161,22 @@ class TweetController extends AbstractController
         $tweet = $this->tweetRepository->find($id);
 
         if (!$tweet)
-            return $this->json(['error' => 'Tweet not found'], 404);
-
-        $user = $this->userRepository->findOneBy(['username' => "testuser"]);
+            return $this->json(['error' => 'Tweet introuvable'], 404);
 
         // Vérifiez si l'utilisateur a déjà aimé le tweet
         if ($tweet->getLikes()->contains($this->getUser()))
-            return $this->json(['error' => 'You have already liked this tweet'], 400);
+            return $this->json(['error' => 'Vous avez déjà liké ce tweet'], 400);
 
         // Ajoutez l'utilisateur à la liste des likes
+        $user = $this->getUser();
+
+        if (!$user instanceof \App\Entity\User) {
+            return $this->json(['error' => 'Utilisateur non identifié ou invalide'], 401);
+        }
+
         $tweet->addLike($user);
         $this->em->flush();
 
-        return $this->json(['message' => 'Tweet liked successfully']);
+        return $this->json(['message' => 'Tweet liké avec succès']);
     }
 }

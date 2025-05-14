@@ -10,13 +10,15 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class AuthController extends AbstractController
 {
     public function __construct(
         private EntityManagerInterface $em,
         private UserRepository $userRepository,
-        private UserPasswordHasherInterface $passwordHasher
+        private UserPasswordHasherInterface $passwordHasher,
+        private ValidatorInterface $validator
     ) {}
 
     #[Route('/api/register', name: 'app_register', methods: ['POST'])]
@@ -24,18 +26,27 @@ class AuthController extends AbstractController
     {
         // Récupération de la requête
         $data = json_decode($request->getContent(), true);
-        $username = $data['username'] ?? null;
-        $password = $data['password'] ?? null;
+        $user = new User();
+        $user->setUsername($data['username'] ?? '');
+        $user->setPassword($data['password'] ?? '');
 
         // Vérifiez si l'utilisateur existe déjà
-        if ($this->userRepository->findOneBy(['username' => $username])) {
-            return $this->json(['error' => 'User already exists'], 400);
+        if ($this->userRepository->findOneBy(['username' => $user->getUsername()])) {
+            return $this->json(['error' => 'Un utilisateur avec le même identifiant existe déjà'], 400);
         }
 
-        $user = new User();
-        $user->setUsername($username);
+        $errors = $this->validator->validate($user);
+
+        if (count($errors) > 0) {
+            $errorMessages = [];
+            foreach ($errors as $error) {
+                $errorMessages[] = $error->getPropertyPath() . ' : ' . $error->getMessage();
+            }
+            return $this->json(['errors' => $errorMessages], 400);
+        }
+
         $user->setPassword(
-            $this->passwordHasher->hashPassword($user, $password)
+            $this->passwordHasher->hashPassword($user, $user->getPassword())
         );
         $user->setRoles(['ROLE_USER']);
 
@@ -43,7 +54,7 @@ class AuthController extends AbstractController
         $this->em->persist($user);
         $this->em->flush();
 
-        return $this->json(['message' => 'User registered successfully']);
+        return $this->json(['message' => 'Utilisateur enregistré avec succès']);
     }
 
 }

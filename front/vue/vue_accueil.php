@@ -1,6 +1,10 @@
 <?php
 include "vue_entete.php";
 
+// Assure-toi que la connexion à la base de données est correctement établie
+// Exemple : 
+// $bdd = new PDO('mysql:host=localhost;dbname=nom_de_ta_base', 'utilisateur', 'mot_de_passe');
+
 // Requête pour récupérer les 5 derniers utilisateurs connectés
 //$requete = $bdd->query("SELECT pseudo FROM utilisateur ORDER BY derniere_connexion DESC LIMIT 5");
 //$utilisateurs = $requete->fetchAll(PDO::FETCH_COLUMN);
@@ -35,7 +39,8 @@ include "vue_entete.php";
                 <span id="result-text">
                     <?= implode(', ', $utilisateurs); ?>
                 </span>
-            <?php else : ?>
+            <?php else : 
+                ?>
                 Aucun membre connecté récemment.
             <?php endif; ?>
         </div>

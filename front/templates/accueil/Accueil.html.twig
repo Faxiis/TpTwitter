@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Page d'accueil{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+{% endblock %}
+
+{% block body %}
+<div class="header">
+    <div class="logo">RÉSEAU IIA</div>
+    <div class="date">
+        {% set jours = ['dimanche', 'lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi'] %}
+        {% set mois = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'] %}
+        {{ jours[date().format('w')]|capitalize }} {{ date().format('d') }} {{ mois[date().format('n') - 1]|capitalize }} {{ date().format('Y') }}
+    </div>
+    <div class="auth-buttons">
+        <a href="{{ path('app_Connexion') }}">
+            <button class="btn">Se connecter</button>
+        </a>
+        <a href="{{ path('app_Inscription') }}">
+            <button class="btn">Inscription</button>
+        </a>
+    </div>
+</div>
+
+<div class="example-wrapper">
+    <h1>Voir ce qui se raconte sur…</h1>
+
+    <!-- Formulaire de recherche -->
+    <table class="form-table">
+        <tr>
+            <td class="form-column">
+                <div class="form-wrapper">
+                    <div class="form-group">
+                        <label for="searchText">Saisissez votre texte...</label>
+                        <input type="text" id="searchText" placeholder="Saisissez votre texte..." class="search-input">
+                    </div>
+                    <button id="searchButton" class="btn">Rechercher</button>
+                </div>
+            </td>
+            <td class="image-column">
+                <div class="profile-photo-box">
+                    <img src="{{ asset('uploads/logoaccueil.png') }}" alt="Votre photo" class="profile-photo">
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<!-- Résultat de la recherche -->
+<div id="result" class="result-box">
+    {% if utilisateurs is not empty %}
+        <p>Liste des derniers membres :</p>
+        <ul>
+            {% for utilisateur in utilisateurs %}
+                <li>
+                    <strong>{{ utilisateur.name }}</strong>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Aucun membre connecté récemment.</p>
+    {% endif %}
+</div>
+
+{% endblock %}

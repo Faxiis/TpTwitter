@@ -1,0 +1,146 @@
+/* app.css — CSS global pour toutes les pages */
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1em;
+    background-color: #f0f0f0;
+    border-bottom: 2px solid #ccc;
+    font-family: Arial, sans-serif;
+}
+
+.header .logo {
+    font-weight: bold;
+    font-size: 1.5em;
+}
+
+.header .date {
+    font-size: 1em;
+    color: #555;
+}
+
+.header .auth-buttons a {
+    margin-left: 1em;
+    text-decoration: none;
+}
+
+.header .auth-buttons .btn {
+    padding: 0.5em 1em;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 0.9em;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.header .auth-buttons .btn:hover {
+    background-color: #0056b3;
+}
+
+.example-wrapper {
+    margin: 2em auto;
+    max-width: 800px;
+    width: 95%;
+    font: 18px/1.5 sans-serif;
+}
+
+.form-wrapper {
+    margin-top: 2em;
+    padding: 2em;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-wrapper h2 {
+    text-align: center;
+    margin-bottom: 1.5em;
+}
+
+.form-wrapper .form-group {
+    margin-bottom: 1.5em;
+}
+
+.form-wrapper .form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 0.5em;
+}
+
+.form-wrapper .form-group input {
+    width: 100%;
+    padding: 0.8em;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1em;
+}
+
+.form-wrapper .form-group input:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+.form-wrapper .form-group .error-message {
+    color: red;
+    font-size: 0.9em;
+}
+
+.form-wrapper button {
+    width: 100%;
+    padding: 1em;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.2em;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.form-wrapper button:hover {
+    background-color: #0056b3;
+}
+.example-wrapper {
+    margin-top: 20px;
+}
+
+.form-table {
+    width: 100%; /* Remplir toute la largeur du conteneur */
+    table-layout: fixed; /* Fixer la taille des colonnes */
+}
+
+.form-column {
+    width: 70%; /* Prendre 70% de la largeur pour le formulaire */
+}
+
+.image-column {
+    width: 30%; /* Prendre 30% de la largeur pour l'image */
+    text-align: center; /* Centrer l'image */
+}
+
+.profile-photo-box {
+    width: 250px;
+    height: 250px;
+    background-color: blue; /* Carré bleu */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+    margin-left: 20px;
+}
+
+.profile-photo {
+    width: 250px;
+    height: 250px;
+    object-fit: cover; /* Pour s'assurer que l'image s'adapte correctement */
+    border-radius: 8px;
+}

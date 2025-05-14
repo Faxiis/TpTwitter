@@ -1,0 +1,18 @@
+<?php
+
+namespace App\Controller;
+
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
+
+class InscriptionController extends AbstractController
+{
+    #[Route('/Inscription', name: 'app_Inscription')]
+    public function index(): Response
+    {
+        return $this->render('Inscription/inscription.html.twig', [
+            'controller_name' => 'AccueilController',
+        ]);
+    }
+}

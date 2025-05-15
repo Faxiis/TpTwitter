@@ -5,6 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5326b0a9-3d45-46e4-9a65-66f9f20ae477" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../front/src/Controller/ConnexionController.php" beforeDir="false" afterPath="$PROJECT_DIR$/../front/src/Controller/ConnexionController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../front/src/Controller/InscriptionController.php" beforeDir="false" afterPath="$PROJECT_DIR$/../front/src/Controller/InscriptionController.php" afterDir="false" />
     </list>
@@ -113,21 +114,21 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "dev__front__back",
-    "last_opened_file_path": "C:/Users/antho/Documents/M1_PHP_AVANCE/TpTwitter/front",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;dev__front__back&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/antho/Documents/M1_PHP_AVANCE/TpTwitter/front&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -148,7 +149,7 @@
       <workItem from="1747206260011" duration="2439000" />
       <workItem from="1747208770565" duration="13650000" />
       <workItem from="1747292590922" duration="2595000" />
-      <workItem from="1747301274004" duration="517000" />
+      <workItem from="1747301274004" duration="584000" />
     </task>
     <servers />
   </component>

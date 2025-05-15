@@ -14,44 +14,69 @@
         {% set mois = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'] %}
         {{ jours[date().format('w')]|capitalize }} {{ date().format('d') }} {{ mois[date().format('n') - 1]|capitalize }} {{ date().format('Y') }}
     </div>
-    <div class="auth-buttons">
-        <a href="{{ path('app_Inscription') }}">
-            <button class="btn">Inscription</button>
-        </a>
-    </div>
-</div>
-
-<!-- Conteneur principal -->
-<div class="main-container" style="max-width: 900px; margin: 40px auto;">
-
     <!-- Bloc input + bouton -->
-    <div style="background-color: #f0f0f0; padding: 25px; border-radius: 10px; margin-bottom: 25px;">
-        <h2 style="margin-bottom: 15px;">Voir ce qui se raconte sur…</h2>
-
+    <form method="get" action="{{ path('search') }}">
         <div style="display: flex; gap: 12px;">
-            <input 
-                type="text" 
-                id="identifiant" 
-                name="identifiant" 
-                required 
-                style="flex: 1; padding: 12px; font-size: 16px; border: 1px solid #ccc; border-radius: 6px;"
+            <input
+                    type="text"
+                    id="research"
+                    name="research"
+                    placeholder="Rechercher un tweet"
+                    required
+                    style="flex: 1; padding: 12px; font-size: 16px; border: 1px solid #ccc; border-radius: 6px;"
             >
-            <button 
-                class="form-button" 
-                type="submit"
-                style="padding: 12px 24px; font-size: 16px;"
+            <button
+                    class="form-button"
+                    type="submit"
+                    style="padding: 12px 24px; font-size: 16px;"
             >Rechercher</button>
         </div>
+    </form>
+</div>
 
-        <div class="error-message" style="display:none; color:red; margin-top:10px;">
-            Erreur: Identifiant invalide
+    <!-- Conteneur principal -->
+    <div class="main-container" style="max-width: 700px; margin: 40px auto;">
+
+        <!-- Bloc bleu -->
+        <div style="background-color: #aed2ff; color: black; padding: 25px; border-radius: 10px;">
+            <strong>Liste des derniers membres :</strong>
+            {% if users is not empty %}
+                {{ users|map(u => u.username)|join(', ') }}
+            {% else %}
+                Aucun membre trouvé.
+            {% endif %}
+        </div>
+
+        {% if errorMessage %}
+            <div class="error" style="color: red;">{{ errorMessage }}</div>
+        {% endif %}
+
+        <!-- Liste des tweets -->
+        <div class="tweets-list">
+            {% for tweet in tweets %}
+                <div class="tweet" style="background: #fff; padding: 20px; border-radius: 10px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); margin-bottom: 15px;">
+                    <div class="tweet-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                        <div class="author" style="font-weight: bold; color: #333;">
+                            {{ tweet.user }}
+                        </div>
+                        <div class="date" style="font-size: 12px; color: #777;">
+                            {{ tweet.createdAt|date('d/m/Y H:i') }}
+                        </div>
+                    </div>
+                    <div class="tweet-content" style="font-size: 16px; margin-bottom: 12px;">
+                        {{ tweet.content }}
+                    </div>
+                    <div class="tweet-actions" style="display: flex; align-items: center; gap: 10px;">
+                        <form method="post" style="margin:0;">
+                            <button type="submit" style="background: none; border: none; color: #1DA1F2; cursor: pointer; font-weight: bold;">
+                                ❤️ {{ tweet.likes|default(0) }}
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            {% else %}
+                <p>Aucun tweet trouvé.</p>
+            {% endfor %}
         </div>
     </div>
-
-    <!-- Bloc bleu -->
-    <div style="background-color: #007bff; color: white; padding: 25px; border-radius: 10px;">
-        <strong>Liste des derniers membres :</strong>
-    </div>
-
-</div>
 {% endblock %}

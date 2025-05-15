@@ -16,10 +16,10 @@ class UserController extends AbstractController
         private EntityManagerInterface $em)
     { }
 
-    #[Route('/api/users', name: 'app_users_all', methods: ['GET'])]
+    #[Route('/api/user', name: 'app_users_all', methods: ['GET'])]
     public function getAll(): JsonResponse
     {
-        $users = $this->userRepository->findAll();
+        $users = $this->userRepository->findBy([], ['creatd_at' => 'DESC'], 4);
 
         if (!$users)
             return $this->json(['error' => 'Aucun utilisateur trouvé'], 404);
@@ -30,12 +30,14 @@ class UserController extends AbstractController
                 'id' => $user->getId(),
                 'username' => $user->getUsername(),
                 'roles' => $user->getRoles(),
+                'profilePicture' => $user->getProfilePicture(),
+                'createdAt' => $user->getCreatdAt()->format('Y-m-d H:i:s'),
             ];
         }
         return $this->json($data);
     }
 
-    #[Route('/api/users/{username}', name: 'app_users_all', methods: ['GET'])]
+    #[Route('/api/users/{username}', name: 'app_users_by_username', methods: ['GET'])]
     public function getByUsername(string $username): JsonResponse
     {
         $user = $this->userRepository->findOneBy(['username' => $username]);
@@ -46,6 +48,8 @@ class UserController extends AbstractController
             'id' => $user->getId(),
             'username' => $user->getUsername(),
             'roles' => $user->getRoles(),
+            'profilePicture' => $user->getProfilePicture(),
+            'createdAt' => $user->getCreatdAt()->format('Y-m-d H:i:s'),
         ];
 
         return $this->json($data);

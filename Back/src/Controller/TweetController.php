@@ -36,6 +36,7 @@ class TweetController extends AbstractController
                 'content' => $tweet->getContent(),
                 'user' => $tweet->getUsr()->getUsername(),
                 'likes' => count($tweet->getLikes()),
+                'createdAt' => $tweet->getCreatedAt()->format('Y-m-d H:i:s'),
             ];
         }
         return $this->json($data);
@@ -53,6 +54,7 @@ class TweetController extends AbstractController
             'content' => $tweet->getContent(),
             'user' => $tweet->getUsr()->getUsername(),
             'likes' => count($tweet->getLikes()),
+            'createdAt' => $tweet->getCreatedAt()->format('Y-m-d H:i:s'),
         ];
 
         return $this->json($data);
@@ -78,6 +80,7 @@ class TweetController extends AbstractController
                 'content' => $tweet->getContent(),
                 'user' => $tweet->getUsr()->getUsername(),
                 'likes' => count($tweet->getLikes()),
+                'createdAt' => $tweet->getCreatedAt()->format('Y-m-d H:i:s'),
             ];
         }
 
@@ -197,6 +200,7 @@ class TweetController extends AbstractController
                 'content' => $tweet->getContent(),
                 'user' => $tweet->getUsr()->getUsername(),
                 'likes' => count($tweet->getLikes()),
+                'createdAt' => $tweet->getCreatedAt()->format('Y-m-d H:i:s'),
             ];
         }
 

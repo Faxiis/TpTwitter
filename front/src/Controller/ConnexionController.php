@@ -14,7 +14,7 @@ class ConnexionController extends AbstractController
         private ApiClientService $apiClient
     ){}
 
-    #[Route('/Connexion', name: 'app_Connexion')]
+    #[Route('/connexion', name: 'app_Connexion')]
     public function index(Request $request): Response
     {
         // Traitement du formulaire

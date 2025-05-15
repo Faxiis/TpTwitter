@@ -29,6 +29,7 @@ class AuthController extends AbstractController
         $user = new User();
         $user->setUsername($data['username'] ?? '');
         $user->setPassword($data['password'] ?? '');
+        $user->setCreatdAt(new \DateTime());
 
         // Vérifiez si l'utilisateur existe déjà
         if ($this->userRepository->findOneBy(['username' => $user->getUsername()])) {

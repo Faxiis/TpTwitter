@@ -31,6 +31,7 @@ class UserFixtures extends Fixture
             $user->setUsername('user' . $i);
             $user->setRoles(['ROLE_USER']);
             $user->setPassword($this->passwordEncoder->hashPassword($user, 'password' . $i));
+            $user->setCreatdAt($faker->dateTimeBetween('-1 year', 'now'));
 
             $manager->persist($user);
             $users[] = $user;

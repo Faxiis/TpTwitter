@@ -8,7 +8,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class InscriptionController extends AbstractController
 {
-    #[Route('/Inscription', name: 'app_Inscription')]
+    #[Route('/inscription', name: 'app_Inscription')]
     public function index(): Response
     {
         return $this->render('Inscription/inscription.html.twig', [

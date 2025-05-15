@@ -25,43 +25,28 @@
 </div>
 
 <div class="example-wrapper">
-    <h1>Voir ce qui se raconte sur…</h1>
+    <h1>Page de file63</h1>
 
-    <!-- Formulaire de recherche -->
     <table class="form-table">
         <tr>
+            <!-- Colonne gauche : les carrés bleus -->
             <td class="form-column">
-                <div class="form-wrapper">
-                    <div class="form-group">
-                        <label for="searchText">Saisissez votre texte...</label>
-                        <input type="text" id="searchText" placeholder="Saisissez votre texte..." class="search-input">
-                    </div>
-                    <button id="searchButton" class="btn">Rechercher</button>
+                <div class="info-container">
+                    <div class="info-box">31/03/2010 10h05 – Je suis en Cours de PHP & MySQL</div>
+                </div>
+                <div class="info-container">
+                    <div class="info-box">15/03/2015 10h05 – Je connais l'apocalypse</div>
+                </div>
+                <div class="info-container">
+                    <div class="info-box">01/01/2020 08h00 – Bonne année à tous !</div>
+                </div>
+                <div class="info-container">
+                    <div class="info-box">15/05/2025 14h22 – Symfony, c’est trop puissant 😎</div>
                 </div>
             </td>
-            <td class="image-column">
-                <div class="profile-photo-box">
-                    <img src="{{ asset('uploads/logoaccueil.png') }}" alt="Votre photo" class="profile-photo">
-                </div>
-            </td>
+
+        
         </tr>
     </table>
 </div>
-
-<!-- Résultat de la recherche -->
-<div id="result" class="result-box">
-    {% if utilisateurs is not empty %}
-        <p>Liste des derniers membres :</p>
-        <ul>
-            {% for utilisateur in utilisateurs %}
-                <li>
-                    <strong>{{ utilisateur.name }}</strong>
-                </li>
-            {% endfor %}
-        </ul>
-    {% else %}
-        <p>Aucun membre connecté récemment.</p>
-    {% endif %}
-</div>
-
 {% endblock %}

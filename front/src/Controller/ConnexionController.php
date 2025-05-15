@@ -8,7 +8,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class ConnexionController extends AbstractController
 {
-    #[Route('/Connexion', name: 'app_Connexion')]
+    #[Route('/connexion', name: 'app_Connexion')]
     public function index(): Response
     {
         return $this->render('Connexion/Connexion.html.twig', [

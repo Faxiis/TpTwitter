@@ -54,11 +54,12 @@ body {
 }
 
 .form-wrapper {
-    margin-top: 2em;
-    padding: 2em;
+    max-width: 400px;
+    margin: 100px auto;
+    padding: 2rem;
     background-color: #f9f9f9;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .form-wrapper h2 {
@@ -122,6 +123,7 @@ body {
     width: 70%; /* Prendre 70% de la largeur pour le formulaire */
 }
 
+
 .image-column {
     width: 30%; /* Prendre 30% de la largeur pour l'image */
     text-align: center; /* Centrer l'image */
@@ -144,3 +146,5 @@ body {
     object-fit: cover; /* Pour s'assurer que l'image s'adapte correctement */
     border-radius: 8px;
 }
+
+

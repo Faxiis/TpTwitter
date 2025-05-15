@@ -165,4 +165,30 @@ class ApiClientService
             ];
         }
     }
+
+    public function likeTweet(int $tweetId): array
+    {
+        try {
+            $response = $this->client->request('POST', 'http://localhost:8080/api/tweet/like/' . $tweetId, [
+                'headers' => [
+                    'Authorization' => 'Bearer ' . $this->requestStack->getSession()->get('jwt_token'),
+                ],
+            ]);
+
+            return [
+                'success' => true,
+                'data' => $response->toArray(),
+            ];
+        } catch (\Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface $e) {
+            $response = $e->getResponse();
+            $content = $response->getContent(false);
+            $data = json_decode($content, true);
+
+            return [
+                'success' => false,
+                'data' => $data,
+                'status' => $response->getStatusCode(),
+            ];
+        }
+    }
 }

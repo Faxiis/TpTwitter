@@ -6,18 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="5326b0a9-3d45-46e4-9a65-66f9f20ae477" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/AuthController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/AuthController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/TweetController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/TweetController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/UserController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DataFixtures/UserFixtures.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataFixtures/UserFixtures.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../front/public/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/../front/public/css/app.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../front/src/Controller/AccueilController.php" beforeDir="false" afterPath="$PROJECT_DIR$/../front/src/Controller/AccueilController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../front/src/Controller/ConnexionController.php" beforeDir="false" afterPath="$PROJECT_DIR$/../front/src/Controller/ConnexionController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../front/src/Service/ApiClientService.php" beforeDir="false" afterPath="$PROJECT_DIR$/../front/src/Service/ApiClientService.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../front/templates/Accueil/Accueil.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/../front/templates/Accueil/Accueil.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../front/templates/Connexion/Connexion.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/../front/templates/Connexion/Connexion.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../front/templates/Inscription/inscription.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/../front/templates/Inscription/inscription.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -159,7 +151,7 @@
       <workItem from="1747206260011" duration="2439000" />
       <workItem from="1747208770565" duration="13650000" />
       <workItem from="1747292590922" duration="2595000" />
-      <workItem from="1747301274004" duration="9225000" />
+      <workItem from="1747301274004" duration="10662000" />
     </task>
     <servers />
   </component>

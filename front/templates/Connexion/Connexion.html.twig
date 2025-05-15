@@ -4,6 +4,24 @@
 
 {% block stylesheets %}
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const container = document.getElementById('flash-messages-container');
+            const messages = document.querySelectorAll('.flash-message');
+
+            messages.forEach(msg => {
+                msg.style.display = 'block';
+                container.appendChild(msg);
+
+                // Auto hide après 4 secondes
+                setTimeout(() => {
+                    msg.style.opacity = '0';
+                    setTimeout(() => msg.remove(), 500);
+                }, 4000);
+            });
+        });
+    </script>
 {% endblock %}
 
 {% block body %}
@@ -38,16 +56,22 @@
                 <div class="error-message" style="display:none;">Erreur: Mot de passe invalide</div>
             </div>
 
-            {% for label, messages in app.flashes %}
-                {% for message in messages %}
-                    <div class="flash-{{ label }}">
-                        {{ message }}
-                    </div>
-                {% endfor %}
-            {% endfor %}
 
             <button class="form-button" type="submit">Connexion</button>
         </form>
+
     </div>
 
+
+    <div id="flash-messages-container" style="position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); z-index: 9999;">
+
+        {% for label, messages in app.flashes %}
+            {% for message in messages %}
+                <div class="flash-message" style="padding: 12px 24px; margin-top: 8px; border-radius: 6px; color: white; font-weight: 600; min-width: 300px; box-shadow: 0 2px 6px rgba(0,0,0,0.2);">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endfor %}
+
+    </div>
 {% endblock %}

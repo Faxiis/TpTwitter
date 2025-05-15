@@ -71,4 +71,21 @@ class AccueilController extends AbstractController
             'users' => $users['data'],
         ]);
     }
+
+    #[Route('/like/{id}', name: 'like_tweet', methods: ['POST'])]
+    public function like(int $id): Response
+    {
+        $result = $this->apiClient->likeTweet($id); // ✅ appel que tu as déjà
+
+        if(!$result['success']) {
+            // Option 1 : gérer l'erreur (afficher message, rediriger, etc.)
+            $errorMessage = "Erreur lors de l'ajout du like : " . ($result['data']['message'] ?? 'Erreur inconnue');
+            $this->addFlash('error', $errorMessage);
+        } else {
+            $this->addFlash('success', 'Tweet liké avec succès !');
+        }
+
+        // Option : Rediriger vers la page d’accueil avec un scroll ou une ancre
+        return $this->redirectToRoute('app_accueil');
+    }
 }

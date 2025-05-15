@@ -67,7 +67,7 @@
                         {{ tweet.content }}
                     </div>
                     <div class="tweet-actions" style="display: flex; align-items: center; gap: 10px;">
-                        <form method="post" style="margin:0;">
+                        <form method="post" action="{{ path('like_tweet', {'id': tweet.id}) }}" style="margin:0;">
                             <button type="submit" style="background: none; border: none; color: #1DA1F2; cursor: pointer; font-weight: bold;">
                                 ❤️ {{ tweet.likes|default(0) }}
                             </button>
@@ -77,6 +77,22 @@
             {% else %}
                 <p>Aucun tweet trouvé.</p>
             {% endfor %}
+
+
         </div>
+
+        <div id="flash-messages-container" style="position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); z-index: 9999;">
+            {% for label, messages in app.flashes %}
+                {% for message in messages %}
+                    <div style="background-color: #2196F3; padding: 12px 24px; margin-top: 8px; border-radius: 6px; color: white; font-weight: 600; min-width: 300px; box-shadow: 0 2px 6px rgba(0,0,0,0.2);">
+                        <div class="flash-{{ label }}">
+                            {{ message }}
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endfor %}
+        </div>
+
+
     </div>
 {% endblock %}

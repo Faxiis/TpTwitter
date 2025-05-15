@@ -58,6 +58,8 @@ body {
     background-color: #f9f9f9;
     border-radius: 12px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px; /* réduit la marge sous le formulaire */
+
 }
 
 .form-wrapper .form-group {
@@ -135,7 +137,7 @@ body {
 .info-container {
     display: flex;
     justify-content: flex-start;
-    margin-top: 15px;
+    margin-top: 10px;
 }
 
 .info-box {
@@ -149,5 +151,14 @@ body {
     box-sizing: border-box;    
     word-wrap: break-word;    
 }
-
+.blue-box {
+    background-color: #007bff; /* bleu */
+    color: white; /* texte en blanc */
+    padding: 30px;
+    margin: 40px auto;
+    max-width: 800px;
+    border-radius: 12px;
+    font-size: 1.2em;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
 

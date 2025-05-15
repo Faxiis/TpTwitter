@@ -32,7 +32,7 @@
     <div class="form-wrapper">
         <h2>Créez votre compte</h2>
 
-        <form method="post" action="#">
+        <form method="post" action="{{ path('app_Inscription') }}">
             <div class="form-group">
                 <label for="identifiant">Identifiant</label>
                 <input type="text" id="identifiant" name="identifiant" required>
@@ -50,6 +50,14 @@
                 <input type="password" id="confirmation" name="confirmation" required>
                 <div class="error-message" style="display:none;">Erreur: Confirmation invalide</div>
             </div>
+
+            {% for label, messages in app.flashes %}
+                {% for message in messages %}
+                    <div class="flash-{{ label }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endfor %}
 
             <button type="submit">S'inscrire</button>
         </form>

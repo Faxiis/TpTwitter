@@ -32,7 +32,10 @@ class AuthController extends AbstractController
 
         // Vérifiez si l'utilisateur existe déjà
         if ($this->userRepository->findOneBy(['username' => $user->getUsername()])) {
-            return $this->json(['error' => 'Un utilisateur avec le même identifiant existe déjà'], 400);
+            return $this->json([
+                'success' => false,
+                'message' => 'Un utilisateur avec le même identifiant existe déjà'
+            ], 400);
         }
 
         $errors = $this->validator->validate($user);
@@ -40,9 +43,12 @@ class AuthController extends AbstractController
         if (count($errors) > 0) {
             $errorMessages = [];
             foreach ($errors as $error) {
-                $errorMessages[] = $error->getPropertyPath() . ' : ' . $error->getMessage();
+                $errorMessages[] = $error->getMessage();
             }
-            return $this->json(['errors' => $errorMessages], 400);
+            return $this->json([
+                'success' => false,
+                'errors' => $errorMessages
+            ], 400);
         }
 
         $user->setPassword(
@@ -54,7 +60,11 @@ class AuthController extends AbstractController
         $this->em->persist($user);
         $this->em->flush();
 
-        return $this->json(['message' => 'Utilisateur enregistré avec succès']);
+
+        return $this->json([
+            'success' => true,
+            'message' => 'Utilisateur enregistré avec succès'
+        ]);
     }
 
 }

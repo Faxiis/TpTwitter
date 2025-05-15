@@ -5,7 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5326b0a9-3d45-46e4-9a65-66f9f20ae477" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../front/src/Controller/ConnexionController.php" beforeDir="false" afterPath="$PROJECT_DIR$/../front/src/Controller/ConnexionController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../front/src/Controller/InscriptionController.php" beforeDir="false" afterPath="$PROJECT_DIR$/../front/src/Controller/InscriptionController.php" afterDir="false" />
     </list>
@@ -118,7 +117,7 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "dev__front__back",
     "last_opened_file_path": "C:/Users/antho/Documents/M1_PHP_AVANCE/TpTwitter/front",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -149,7 +148,7 @@
       <workItem from="1747206260011" duration="2439000" />
       <workItem from="1747208770565" duration="13650000" />
       <workItem from="1747292590922" duration="2595000" />
-      <workItem from="1747301274004" duration="337000" />
+      <workItem from="1747301274004" duration="517000" />
     </task>
     <servers />
   </component>

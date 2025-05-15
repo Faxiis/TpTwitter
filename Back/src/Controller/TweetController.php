@@ -179,4 +179,25 @@ class TweetController extends AbstractController
 
         return $this->json(['message' => 'Tweet liké avec succès']);
     }
+
+    #[Route('/api/tweet/search/{research}', name: 'app_search_tweet', methods: ['GET'])]
+    public function search(string $research): JsonResponse
+    {
+        $tweets = $this->tweetRepository->findByContent($research);
+
+        if (!$tweets)
+            return $this->json(['error' => 'Aucun tweet trouvé'], 404);
+
+        $data = [];
+        foreach ($tweets as $tweet) {
+            $data[] = [
+                'id' => $tweet->getId(),
+                'content' => $tweet->getContent(),
+                'user' => $tweet->getUsr()->getUsername(),
+                'likes' => count($tweet->getLikes()),
+            ];
+        }
+
+        return $this->json($data);
+    }
 }

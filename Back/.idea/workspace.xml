@@ -5,13 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5326b0a9-3d45-46e4-9a65-66f9f20ae477" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../front/src/Service/ApiClientService.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/AuthController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/AuthController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../front/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../front/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../front/src/Controller/CompteController.php" beforeDir="false" afterPath="$PROJECT_DIR$/../front/src/Controller/CompteController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../front/public/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/../front/public/css/app.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../front/src/Controller/ConnexionController.php" beforeDir="false" afterPath="$PROJECT_DIR$/../front/src/Controller/ConnexionController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../front/src/Controller/InscriptionController.php" beforeDir="false" afterPath="$PROJECT_DIR$/../front/src/Controller/InscriptionController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../front/src/Service/ApiClientService.php" beforeDir="false" afterPath="$PROJECT_DIR$/../front/src/Service/ApiClientService.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../front/templates/Connexion/Connexion.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/../front/templates/Connexion/Connexion.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../front/templates/Inscription/inscription.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/../front/templates/Inscription/inscription.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -153,7 +152,7 @@
       <workItem from="1747131314648" duration="12116000" />
       <workItem from="1747206260011" duration="2439000" />
       <workItem from="1747208770565" duration="13650000" />
-      <workItem from="1747292590922" duration="1773000" />
+      <workItem from="1747292590922" duration="2595000" />
     </task>
     <servers />
   </component>

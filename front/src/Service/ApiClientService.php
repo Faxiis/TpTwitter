@@ -14,19 +14,50 @@ class ApiClientService
 
     public function login(string $username, string $password): array
     {
-        $response = $this->client->request('POST', 'http://localhost:8080/api/login', [
-            'json' => [
-                'username' => $username,
-                'password' => $password,
-            ],
-        ]);
+        try {
+            $response = $this->client->request('POST', 'http://localhost:8080/api/login', [
+                'json' => [
+                    'username' => $username,
+                    'password' => $password,
+                ],
+            ]);
 
-        $data = $response->toArray();
+            $data = $response->toArray(false);
 
-        // On stocke le token dans la session
-        $this->requestStack->getSession()->set('jwt_token', $data['token'] ?? null);
+            if (!empty($data['token'])) {
+                // Stocker le token seulement s’il est présent
+                $this->requestStack->getSession()->set('jwt_token', $data['token']);
 
-        return $data;
+                return [
+                    'success' => true,
+                    'data' => $data,
+                ];
+            }
+
+            if (isset($data['message']) && $data['message'] === 'Invalid credentials.') {
+                $data['message'] = 'Identifiant ou mot de passe incorrect.';
+                return [
+                    'success' => false,
+                    'data' => $data,
+                ];
+            }else{
+                return [
+                    'success' => false,
+                    'data' => $data,
+                ];
+            }
+
+        } catch (\Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface $e) {
+            $response = $e->getResponse();
+            $content = $response->getContent(false);
+            $data = json_decode($content, true);
+
+            return [
+                'success' => false,
+                'data' => $data,
+                'status' => $response->getStatusCode(),
+            ];
+        }
     }
 
     public function register(string $username, string $password): array
@@ -45,9 +76,8 @@ class ApiClientService
                 'data' => $response->toArray(),
             ];
         } catch (\Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface $e) {
-            // Exception pour codes 4xx (comme 400)
             $response = $e->getResponse();
-            $content = $response->getContent(false); // Ne déclenche pas d'exception sur erreur HTTP
+            $content = $response->getContent(false);
             $data = json_decode($content, true);
 
             return [

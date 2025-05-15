@@ -20,17 +20,11 @@
         <a href="{{ path('app_Connexion') }}">
         <button class="btn">Se connecter</button>
         </a>
-        <a href="{{ path('app_Inscription') }}">
-        <button class="btn">Inscription</button>
-        </a>
     </div>
 </div>
 
-<div class="example-wrapper">
-    <h1>Inscription</h1>
-
-    <div class="form-wrapper">
-        <h2>Créez votre compte</h2>
+    <div class="form-wrapper example-wrapper">
+        <h2 class="text-align">Créez votre compte</h2>
 
         <form method="post" action="{{ path('app_Inscription') }}">
             <div class="form-group">
@@ -59,9 +53,8 @@
                 {% endfor %}
             {% endfor %}
 
-            <button type="submit">S'inscrire</button>
+            <button class="form-button" type="submit">S'inscrire</button>
         </form>
     </div>
-</div>
 
 {% endblock %}

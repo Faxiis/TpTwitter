@@ -37,7 +37,6 @@ class InscriptionController extends AbstractController
                         } else {
                             $this->addFlash('error', $result['data']['message'] ?? 'Erreur inconnue lors de l’inscription.');
                         }
-                        return $this->redirectToRoute('app_Inscription');
                     }
                     $this->addFlash('success', 'Inscription réussie, veuillez vous connecter.');
                     return $this->redirectToRoute('app_Connexion');

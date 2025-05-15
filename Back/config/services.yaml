@@ -3,7 +3,10 @@
 
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
+
+# config/services.yaml
 parameters:
+    profile_pictures_directory: '%kernel.project_dir%/public/uploads/profile'
 
 services:
     # default configuration for services in *this* file
@@ -19,6 +22,12 @@ services:
             - '../src/DependencyInjection/'
             - '../src/Entity/'
             - '../src/Kernel.php'
+
+    App\Util\LoginLoggerListener:
+        arguments:
+            $projectDir: '%kernel.project_dir%'
+        tags:
+            - { name: kernel.event_listener, event: lexik_jwt_authentication.on_authentication_success, method: onAuthenticationSuccess }
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones

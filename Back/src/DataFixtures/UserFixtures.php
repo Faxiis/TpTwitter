@@ -31,6 +31,7 @@ class UserFixtures extends Fixture
             $user->setUsername('user' . $i);
             $user->setRoles(['ROLE_USER']);
             $user->setPassword($this->passwordEncoder->hashPassword($user, 'password' . $i));
+            $user->setCreatdAt($faker->dateTimeBetween('-1 year', 'now'));
 
             $manager->persist($user);
             $users[] = $user;
@@ -41,6 +42,7 @@ class UserFixtures extends Fixture
             $tweet = new Tweet();
             $tweet->setContent(implode(' ', $faker->words(10)));
             $tweet->setUsr($users[array_rand($users)]); // Utilisateur aléatoire
+            $tweet->setCreatedAt($faker->dateTimeBetween('-1 year', 'now'));
 
             // Ajout de likes aléatoires (5 à 10 utilisateurs différents)
             $likeIndices = array_rand($users, rand(5, 10));

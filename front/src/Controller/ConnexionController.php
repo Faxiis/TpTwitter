@@ -14,7 +14,7 @@ class ConnexionController extends AbstractController
         private ApiClientService $apiClient
     ){}
 
-    #[Route('/Connexion', name: 'app_Connexion')]
+    #[Route('/connexion', name: 'app_Connexion')]
     public function index(Request $request): Response
     {
         // Traitement du formulaire
@@ -32,8 +32,9 @@ class ConnexionController extends AbstractController
                     } else {
                         $this->addFlash('error', $result['data']['message'] ?? 'Erreur inconnue lors de la connexion.');
                     }
+                }else{
+                    return $this->redirectToRoute('app_accueil');
                 }
-                return $this->redirectToRoute('app_accueil');
             } catch (\Exception $e) {
                 $this->addFlash('error', 'Erreur lors de la connexion : ' . $e->getMessage());
             }

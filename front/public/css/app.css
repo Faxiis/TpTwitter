@@ -1,9 +1,11 @@
+/* === GLOBAL === */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
 }
 
+/* === HEADER === */
 .header {
     display: flex;
     justify-content: space-between;
@@ -11,7 +13,6 @@ body {
     padding: 1em;
     background-color: #f0f0f0;
     border-bottom: 2px solid #ccc;
-    font-family: Arial, sans-serif;
 }
 
 .header .logo {
@@ -44,6 +45,69 @@ body {
     background-color: #0056b3;
 }
 
+/* === MAIN CONTAINER === */
+.main-container {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+/* === FORMULAIRE (Page d’accueil) === */
+.search-box {
+    background-color: #f0f0f0;
+    padding: 25px;
+    border-radius: 10px;
+    margin-bottom: 25px;
+}
+
+.search-box h2 {
+    margin-bottom: 15px;
+}
+
+.search-form {
+    display: flex;
+    gap: 12px;
+}
+
+.search-input {
+    flex: 1;
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+
+.search-button {
+    padding: 12px 24px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.search-button:hover {
+    background-color: #0056b3;
+}
+
+.error-message {
+    display: none;
+    color: red;
+    margin-top: 10px;
+}
+
+/* === BLOC BLEU MEMBRES === */
+.member-list-box {
+    background-color: #007bff;
+    color: white;
+    padding: 25px;
+    border-radius: 10px;
+    font-size: 1.1em;
+}
+
+/* === PAGE PERSO - WRAPPER === */
 .example-wrapper {
     margin: 2em auto;
     max-width: 800px;
@@ -51,15 +115,14 @@ body {
     font: 18px/1.5 sans-serif;
 }
 
+/* === FORMULAIRE CENTRAL === */
 .form-wrapper {
-    max-width: 400px;
-    margin: 100px auto;
+    max-width: 800px;
+    margin: 40px auto 20px;
     padding: 2rem;
     background-color: #f9f9f9;
     border-radius: 12px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px; /* réduit la marge sous le formulaire */
-
 }
 
 .form-wrapper .form-group {
@@ -101,6 +164,7 @@ body {
     background-color: #0056b3;
 }
 
+/* === TABLEAU (PAGE PERSO) === */
 .form-table {
     width: 100%;
     table-layout: fixed;
@@ -110,12 +174,12 @@ body {
     width: 70%;
 }
 
-
 .image-column {
     width: 30%;
     text-align: center;
 }
 
+/* === PHOTO DE PROFIL === */
 .profile-photo-box {
     width: 250px;
     height: 250px;
@@ -134,6 +198,7 @@ body {
     border-radius: 8px;
 }
 
+/* === INFO MESSAGES === */
 .info-container {
     display: flex;
     justify-content: flex-start;
@@ -141,19 +206,21 @@ body {
 }
 
 .info-box {
-    border: 2px solid #007bff; /* Bordure bleue */
+    border: 2px solid #007bff;
     border-radius: 10px;
     padding: 1em;
     background-color: #f9f9f9;
-    width: 100%;               
-    max-width: 100%;           
-    min-height: 40px;        
-    box-sizing: border-box;    
-    word-wrap: break-word;    
+    width: 100%;
+    max-width: 100%;
+    min-height: 40px;
+    box-sizing: border-box;
+    word-wrap: break-word;
 }
+
+/* === CARRE BLEU POUR MEMBRES === */
 .blue-box {
-    background-color: #007bff; /* bleu */
-    color: white; /* texte en blanc */
+    background-color: #007bff;
+    color: white;
     padding: 30px;
     margin: 40px auto;
     max-width: 800px;
@@ -162,3 +229,16 @@ body {
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
+/* === BOUTON RECHERCHE SIMPLE === */
+.form-button {
+    padding: 10px 15px;
+    background-color: #007bff;
+    border: none;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.form-button:hover {
+    background-color: #0056b3;
+}

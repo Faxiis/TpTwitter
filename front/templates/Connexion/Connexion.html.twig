@@ -16,22 +16,16 @@
         {{ jours[date().format('w')]|capitalize }} {{ date().format('d') }} {{ mois[date().format('n') - 1]|capitalize }} {{ date().format('Y') }}
     </div>
 <div class="auth-buttons">
-        <a href="{{ path('app_Connexion') }}">
-        <button class="btn">Se connecter</button>
-        </a>
         <a href="{{ path('app_Inscription') }}">
         <button class="btn">Inscription</button>
         </a>
     </div>
 </div>
 
-<div class="example-wrapper">
-    <h1>Connexion</h1>
+    <div class="form-wrapper wrapper">
+        <h2>Connexion</h2>
 
-    <div class="form-wrapper">
-        <h2>Connexion à mon compte</h2>
-
-        <form method="post" action="#">
+        <form method="post" action="{{ path('app_Connexion') }}">
             <div class="form-group">
                 <label for="identifiant">Identifiant</label>
                 <input type="text" id="identifiant" name="identifiant" required>
@@ -43,9 +37,17 @@
                 <input type="password" id="password" name="password" required>
                 <div class="error-message" style="display:none;">Erreur: Mot de passe invalide</div>
             </div>
-            <button type="submit">Valider</button>
+
+            {% for label, messages in app.flashes %}
+                {% for message in messages %}
+                    <div class="flash-{{ label }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endfor %}
+
+            <button class="form-button" type="submit">Connexion</button>
         </form>
     </div>
-</div>
 
 {% endblock %}

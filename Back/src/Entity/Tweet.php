@@ -6,6 +6,7 @@ use App\Repository\TweetRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: TweetRepository::class)]
 class Tweet
@@ -16,10 +17,13 @@ class Tweet
     private ?int $id = null;
 
     #[ORM\Column(length: 280)]
+    #[Assert\NotBlank(message: "Le contenu ne peut pas être vide.")]
+    #[Assert\Length(max: 280, maxMessage: "Le tweet ne peut pas dépasser 280 caractères.")]
     private ?string $content = null;
 
     #[ORM\ManyToOne(inversedBy: 'tweets')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Assert\NotNull(message: "L'utilisateur est requis pour créer un tweet.")]
     private ?User $usr = null;
 
     #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'likes')]

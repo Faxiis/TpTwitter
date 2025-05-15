@@ -32,8 +32,9 @@ class ConnexionController extends AbstractController
                     } else {
                         $this->addFlash('error', $result['data']['message'] ?? 'Erreur inconnue lors de la connexion.');
                     }
+                }else{
+                    return $this->redirectToRoute('app_accueil');
                 }
-                return $this->redirectToRoute('app_accueil');
             } catch (\Exception $e) {
                 $this->addFlash('error', 'Erreur lors de la connexion : ' . $e->getMessage());
             }

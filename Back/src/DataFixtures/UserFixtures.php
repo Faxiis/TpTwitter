@@ -41,6 +41,7 @@ class UserFixtures extends Fixture
             $tweet = new Tweet();
             $tweet->setContent(implode(' ', $faker->words(10)));
             $tweet->setUsr($users[array_rand($users)]); // Utilisateur aléatoire
+            $tweet->setCreatedAt($faker->dateTimeBetween('-1 year', 'now'));
 
             // Ajout de likes aléatoires (5 à 10 utilisateurs différents)
             $likeIndices = array_rand($users, rand(5, 10));

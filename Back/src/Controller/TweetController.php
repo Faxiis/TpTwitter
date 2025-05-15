@@ -92,6 +92,7 @@ class TweetController extends AbstractController
         $tweet = new Tweet();
         $tweet->setContent($data['content'] ?? '');
         $tweet->setUsr($this->getUser());
+        $tweet->setCreatedAt(new \DateTime());
 
         $errors = $this->validator->validate($tweet);
         if (count($errors) > 0) {
@@ -131,6 +132,7 @@ class TweetController extends AbstractController
 
         // Mettez à jour le contenu du tweet
         $tweet->setContent($content);
+        $tweet->setUpdatedAt(new \DateTime());
         $this->em->flush();
 
         return $this->json(['message' => 'Tweet modifié avec succès']);

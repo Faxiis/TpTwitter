@@ -7,7 +7,8 @@
     <list default="true" id="5326b0a9-3d45-46e4-9a65-66f9f20ae477" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/TweetController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/TweetController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Repository/TweetRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/TweetRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DataFixtures/UserFixtures.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataFixtures/UserFixtures.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Tweet.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Tweet.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -149,7 +150,7 @@
       <workItem from="1747206260011" duration="2439000" />
       <workItem from="1747208770565" duration="13650000" />
       <workItem from="1747292590922" duration="2595000" />
-      <workItem from="1747301274004" duration="1534000" />
+      <workItem from="1747301274004" duration="2165000" />
     </task>
     <servers />
   </component>

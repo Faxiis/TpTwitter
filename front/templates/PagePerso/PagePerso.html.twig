@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Page d'accueil{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+{% endblock %}
+
+{% block body %}
+<div class="header">
+    <div class="logo">RÉSEAU IIA</div>
+    <div class="date">
+        {% set jours = ['dimanche', 'lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi'] %}
+        {% set mois = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'] %}
+        {{ jours[date().format('w')]|capitalize }} {{ date().format('d') }} {{ mois[date().format('n') - 1]|capitalize }} {{ date().format('Y') }}
+    </div>
+    <div class="auth-buttons">
+        <a href="{{ path('app_Connexion') }}">
+            <button class="btn">Se connecter</button>
+        </a>
+        <a href="{{ path('app_Inscription') }}">
+            <button class="btn">Inscription</button>
+        </a>
+    </div>
+</div>
+
+<div class="example-wrapper">
+    <h1>Page de pseudo53</h1>
+
+    <!-- Formulaire de recherche -->
+    <table class="form-table">
+        <tr>
+            <td class="form-column">
+                <div class="form-wrapper">
+                    <div class="form-group">
+                        <label for="searchText">Ajouter une info :</label>
+                        <input type="text" id="searchText" placeholder="" class="search-input">
+                    </div>
+                    <button id="searchButton" class="btn">Rechercher</button>
+                </div>
+            </td>
+            <td class="image-column">
+                <div class="profile-photo-box">
+                    <img src="{{ asset('uploads/logoaccueil.png') }}" alt="Votre photo" class="profile-photo">
+                </div>
+            </td>
+        </tr>
+    </table>
+
+    <!-- Rectangle en dessous du tableau, aligné avec la 1ère colonne -->
+    <div class="info-container">
+        <div class="info-box">
+            31/03/2010 10h05 – Je suis en Cours de PHP & MySQL
+        </div>
+    </div>
+        <div class="info-container">
+        <div class="info-box">
+            15/03/2015 10h05 – Je connais l'apocalypse
+        </div>
+    </div>
+</div>
+{% endblock %}

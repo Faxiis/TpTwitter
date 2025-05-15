@@ -9,7 +9,7 @@ use Doctrine\ORM\EntityManagerInterface;
 
 class ResultatRechercheController extends AbstractController
 {
-    #[Route('/resultatrecherche', name: 'app_ResultatRecherche')]
+    #[Route('/resultatrecherche', name: 'app_resultatrecherche')]
     public function index(EntityManagerInterface $entityManager): Response
     {
         

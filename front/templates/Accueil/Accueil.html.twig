@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+{% endblock %}
+
+{% block body %}
+<div class="header">
+    <div class="logo">RÉSEAU IIA</div>
+    <div class="date">
+        {% set jours = ['dimanche', 'lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi'] %}
+        {% set mois = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'] %}
+        {{ jours[date().format('w')]|capitalize }} {{ date().format('d') }} {{ mois[date().format('n') - 1]|capitalize }} {{ date().format('Y') }}
+    </div>
+    <div class="auth-buttons">
+        <a href="{{ path('app_Inscription') }}">
+            <button class="btn">Inscription</button>
+        </a>
+    </div>
+</div>
+
+<!-- Conteneur principal -->
+<div class="main-container" style="max-width: 900px; margin: 40px auto;">
+
+    <!-- Bloc input + bouton -->
+    <div style="background-color: #f0f0f0; padding: 25px; border-radius: 10px; margin-bottom: 25px;">
+        <h2 style="margin-bottom: 15px;">Voir ce qui se raconte sur…</h2>
+
+        <div style="display: flex; gap: 12px;">
+            <input 
+                type="text" 
+                id="identifiant" 
+                name="identifiant" 
+                required 
+                style="flex: 1; padding: 12px; font-size: 16px; border: 1px solid #ccc; border-radius: 6px;"
+            >
+            <button 
+                class="form-button" 
+                type="submit"
+                style="padding: 12px 24px; font-size: 16px;"
+            >Rechercher</button>
+        </div>
+
+        <div class="error-message" style="display:none; color:red; margin-top:10px;">
+            Erreur: Identifiant invalide
+        </div>
+    </div>
+
+    <!-- Bloc bleu -->
+    <div style="background-color: #007bff; color: white; padding: 25px; border-radius: 10px;">
+        <strong>Liste des derniers membres :</strong>
+    </div>
+
+</div>
+{% endblock %}

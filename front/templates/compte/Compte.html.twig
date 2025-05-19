@@ -18,14 +18,18 @@
             <label for="photo">Choisir une photo</label>
             <input type="file" id="photo" name="profile_picture" accept="image/*" required>
         </div>
-        <button type="submit">Enregistrer</button>
+        <button type="submit" style="max-width: 120px;display: flex; align-items: center; gap: 6px; font-size: 14px; padding: 6px 10px; border-radius: 4px;">
+            <i class="fas fa-save" style="font-size: 14px;"></i> Sauvegarder
+        </button>
+
+
     </form>
 
     <h2 class="form-titles">Mes tweets</h2>
     <!-- Liste des tweets -->
     <div class="tweets-list">
         {% for tweet in userTweets %}
-            <div class="tweet" style="background: #fff; padding: 20px; border-radius: 10px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); margin-bottom: 15px;">
+            <div class="tweet" style=" border: 1px solid #ddd;background: #fff; padding: 20px; border-radius: 10px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); margin-bottom: 15px;">
                 <div class="tweet-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
                     <div class="author" style="font-weight: bold; color: #333;">
                         {{ tweet.user }}
@@ -38,9 +42,10 @@
                     {{ tweet.content }}
                 </div>
                 <form method="post" action="{{ path('tweet_delete', {'id': tweet.id}) }}" onsubmit="return confirm('Voulez-vous vraiment supprimer ce tweet ?');" style="text-align: right;">
-                    <button type="submit" style="background-color: #e74c3c; color: white; border: none; padding: 8px 12px; border-radius: 5px; cursor: pointer;">
-                        Supprimer
+                    <button type="submit" style="background-color: #e74c3c; color: white; border: none; padding: 8px 12px; border-radius: 5px; cursor: pointer; display: flex; align-items: center; gap: 6px; max-width: 42px;">
+                        <i class="fas fa-trash"></i>
                     </button>
+
                 </form>
             </div>
         {% else %}

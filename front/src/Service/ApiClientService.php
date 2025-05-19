@@ -226,9 +226,34 @@ class ApiClientService
         }
     }
 
-    public function getTweetByUsername(): array{
+    public function getTweetByUsername(string $username): array{
         try {
-            $response = $this->client->request('GET', 'http://localhost:8080/api/tweet/user/' . $this->requestStack->getSession()->get('username'), [
+            $response = $this->client->request('GET', 'http://localhost:8080/api/tweet/user/' . $username, [
+                'headers' => [
+                    'Authorization' => 'Bearer ' . $this->requestStack->getSession()->get('jwt_token'),
+                ],
+            ]);
+
+            return [
+                'success' => true,
+                'data' => $response->toArray(),
+            ];
+        } catch (\Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface $e) {
+            $response = $e->getResponse();
+            $content = $response->getContent(false);
+            $data = json_decode($content, true);
+
+            return [
+                'success' => false,
+                'data' => $data,
+                'status' => $response->getStatusCode(),
+            ];
+        }
+    }
+
+    public function getUserByUsername(string $username){
+        try {
+            $response = $this->client->request('GET', 'http://localhost:8080/api/users/' . $username, [
                 'headers' => [
                     'Authorization' => 'Bearer ' . $this->requestStack->getSession()->get('jwt_token'),
                 ],

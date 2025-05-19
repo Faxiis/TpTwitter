@@ -4,24 +4,6 @@
 
 {% block stylesheets %}
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const container = document.getElementById('flash-messages-container');
-            const messages = document.querySelectorAll('.flash-message');
-
-            messages.forEach(msg => {
-                msg.style.display = 'block';
-                container.appendChild(msg);
-
-                // Auto hide après 4 secondes
-                setTimeout(() => {
-                    msg.style.opacity = '0';
-                    setTimeout(() => msg.remove(), 500);
-                }, 4000);
-            });
-        });
-    </script>
 {% endblock %}
 
 {% block body %}

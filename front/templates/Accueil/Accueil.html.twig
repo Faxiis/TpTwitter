@@ -4,24 +4,6 @@
 
 {% block stylesheets %}
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const container = document.getElementById('flash-messages-container');
-            const messages = document.querySelectorAll('.flash-message');
-
-            messages.forEach(msg => {
-                msg.style.display = 'block';
-                container.appendChild(msg);
-
-                // Auto hide après 4 secondes
-                setTimeout(() => {
-                    msg.style.opacity = '0';
-                    setTimeout(() => msg.remove(), 500);
-                }, 4000);
-            });
-        });
-    </script>
 {% endblock %}
 
 {% block body %}
@@ -52,7 +34,7 @@
     <div class="main-container" style="max-width: 700px; margin: 40px auto;">
 
         <!-- Zone de publication de tweet -->
-        <div class="new-tweet" style="background-color: #fff; padding: 20px; border-radius: 10px; box-shadow: 0 1px 4px rgba(0,0,0,0.1); margin-bottom: 15px;">
+        <div class="new-tweet" style="background-color: #fff; padding: 20px; border-radius: 10px; box-shadow: 0 1px 4px rgba(0,0,0,0.1);">
             <form method="post" action="{{ path('create_tweet') }}">
             <textarea name="content" placeholder="Quoi de neuf ?" rows="3" maxlength="280"
                   style="width: 100%; border: 1px solid #ccc; border-radius: 6px; padding: 12px; font-size: 16px; resize: none;"></textarea>
@@ -66,7 +48,7 @@
 
 
         <!-- Bloc bleu -->
-        <div style="background-color: #aed2ff; color: black; padding: 25px; border-radius: 10px;">
+        <div style="background-color: #aed2ff; color: black; padding: 25px; border-radius: 10px;margin-bottom: 15px;">
             <strong>Liste des derniers membres :</strong>
             {% if users is not empty %}
                 {{ users|map(u => u.username)|join(', ') }}
@@ -82,10 +64,10 @@
         <!-- Liste des tweets -->
         <div class="tweets-list">
             {% for tweet in tweets %}
-                <div class="tweet" style="background: #fff; padding: 20px; border-radius: 10px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); margin-bottom: 15px;">
+                <div class="tweet" style="background: #fff; padding: 20px; border-radius: 10px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); margin-bottom: 15px; border: 1px solid #ddd;">
                     <div class="tweet-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
                         <div class="author" style="font-weight: bold; color: #333;">
-                            {{ tweet.user }}
+                            <a class="logo" href="http://127.0.0.1:8000/pageperso/{{ tweet.user }}">{{ tweet.user }}</a>
                         </div>
                         <div class="date" style="font-size: 12px; color: #777;">
                             {{ tweet.createdAt|date('d/m/Y H:i') }}

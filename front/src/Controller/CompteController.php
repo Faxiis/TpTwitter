@@ -23,7 +23,7 @@ class CompteController extends AbstractController
     public function index(): Response
     {
         $username = $this->requestStack->getSession()->get('username');
-        $userTweets = $this->apiClient->getTweetByUsername();
+        $userTweets = $this->apiClient->getTweetByUsername($username);
 
         // On ne passe que des tableaux de tweets à Twig
         $tweets = [];
@@ -52,7 +52,7 @@ class CompteController extends AbstractController
         if ($result['success']) {
             $this->addFlash('success', 'Tweet supprimé avec succès.');
         } else {
-            $this->addFlash('error', 'Erreur lors de la suppression : ' . ($result['message'] ?? 'Erreur inconnue'));
+            $this->addFlash('error', 'Erreur lors de la suppression : ' . ($result['data']['message'] ?? 'Erreur inconnue'));
         }
 
         return $this->redirectToRoute('app_Compte');

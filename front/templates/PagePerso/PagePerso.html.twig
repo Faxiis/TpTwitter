@@ -7,56 +7,44 @@
 {% endblock %}
 
 {% block body %}
-<div class="header">
-    <div class="logo">RÉSEAU IIA</div>
-    <div class="date">
-        {% set jours = ['dimanche', 'lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi'] %}
-        {% set mois = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'] %}
-        {{ jours[date().format('w')]|capitalize }} {{ date().format('d') }} {{ mois[date().format('n') - 1]|capitalize }} {{ date().format('Y') }}
+    <div class="header">
+        <a class="logo" href="http://127.0.0.1:8000/accueil">RÉSEAU IIA</a>
     </div>
-    <div class="auth-buttons">
-        <a href="{{ path('app_Connexion') }}">
-            <button class="btn">Se connecter</button>
-        </a>
-        <a href="{{ path('app_Inscription') }}">
-            <button class="btn">Inscription</button>
-        </a>
-    </div>
-</div>
 
 <div class="example-wrapper">
-    <h1>Page de pseudo53</h1>
+    <h1>Profil de : {{ username }}</h1>
 
-    <!-- Formulaire de recherche -->
-    <table class="form-table">
-        <tr>
-            <td class="form-column">
-                <div class="form-wrapper">
-                    <div class="form-group">
-                        <label for="searchText">Ajouter une info :</label>
-                        <input type="text" id="searchText" placeholder="" class="search-input">
+    <p>À rejoint le réseau le : {{ userData[0].createdAt|date('d/m/Y') }}</p>
+
+    <h1>Tweets</h1>
+    <!-- Liste des tweets -->
+    <div class="tweets-list">
+        {% for tweet in userTweets %}
+            <div class="tweet" style=" border: 1px solid #ddd;background: #fff; padding: 20px; border-radius: 10px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); margin-bottom: 15px;">
+                <div class="tweet-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                    <div class="author" style="font-weight: bold; color: #333;">
+                        {{ tweet.user }}
                     </div>
-                    <button id="searchButton" class="btn">Rechercher</button>
+                    <div class="date" style="font-size: 12px; color: #777;">
+                        {{ tweet.createdAt|date('d/m/Y H:i') }}
+                    </div>
                 </div>
-            </td>
-            <td class="image-column">
-                <div class="profile-photo-box">
-                    <img src="{{ asset('uploads/logoaccueil.png') }}" alt="Votre photo" class="profile-photo">
+                <div class="tweet-content" style="font-size: 16px; margin-bottom: 12px;">
+                    {{ tweet.content }}
                 </div>
-            </td>
-        </tr>
-    </table>
+                <div class="tweet-actions" style="display: flex; align-items: center; gap: 10px;">
+                    <form method="post" action="{{ path('like_tweet', {'id': tweet.id}) }}" style="margin:0;">
+                        <button type="submit" style="background: none; border: none; color: #1DA1F2; cursor: pointer; font-weight: bold;">
+                            ❤️ {{ tweet.likes|default(0) }}
+                        </button>
+                    </form>
+                </div>
+            </div>
+        {% else %}
+            <p>Aucun tweet trouvé.</p>
+        {% endfor %}
 
-    <!-- Rectangle en dessous du tableau, aligné avec la 1ère colonne -->
-    <div class="info-container">
-        <div class="info-box">
-            31/03/2010 10h05 – Je suis en Cours de PHP & MySQL
-        </div>
-    </div>
-        <div class="info-container">
-        <div class="info-box">
-            15/03/2015 10h05 – Je connais l'apocalypse
-        </div>
+
     </div>
 </div>
 {% endblock %}

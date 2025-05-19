@@ -14,7 +14,7 @@ class InscriptionController extends AbstractController
         private ApiClientService $apiClient
     ){}
 
-    #[Route('/Inscription', name: 'app_Inscription')]
+    #[Route('/inscription', name: 'app_inscription')]
     public function index(Request $request): Response
     {
         // Traitement du formulaire

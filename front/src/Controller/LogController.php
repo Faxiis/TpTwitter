@@ -10,7 +10,7 @@ use Doctrine\ORM\EntityManagerInterface;
 class LogController extends AbstractController
 {
     #[Route(
-        path: ['/Log', '/Log/'], 
+        path: ['/log', '/log/'], 
         name: 'app_log'
     )]
     public function index(EntityManagerInterface $entityManager): Response

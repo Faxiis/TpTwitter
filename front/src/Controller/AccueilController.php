@@ -17,13 +17,19 @@ class AccueilController extends AbstractController
         private RequestStack $requestStack
     ){}
 
+    #[Route('/', name: 'homepage_redirect')]
+    public function redirectToAccueil(): Response
+    {
+        return $this->redirectToRoute('app_accueil'); // ou 'accueil' selon ton nom de route
+    }
+
     #[Route('/accueil', name: 'app_accueil')]
     public function index(): Response
     {
         $jwt = $this->requestStack->getSession()->get('jwt_token');
         $username = $this->requestStack->getSession()->get('username');
         // Optionnel : vérifie si c'est un token valide (ou si c'est juste une ancienne valeur)
-        if (!$jwt || $jwt === '401') {
+        if (!$jwt || $jwt === '401' || $username == null) {
             return $this->redirectToRoute('app_Connexion');
         }
 
@@ -112,4 +118,15 @@ class AccueilController extends AbstractController
         // Option : Rediriger vers la page d’accueil avec un scroll ou une ancre
         return $this->redirectToRoute('app_accueil');
     }
+
+    #[Route('/logout', name: 'logout', methods: ['POST'])]
+    public function logout(): Response
+    {
+        // Déconnexion de l'utilisateur
+        $this->requestStack->getSession()->remove('jwt_token');
+        $this->requestStack->getSession()->remove('username');
+
+        return $this->redirectToRoute('app_Connexion');
+    }
+
 }

@@ -9,7 +9,6 @@
 {% block body %}
 <div class="header">
     <a href="http://127.0.0.1:8000/Compte">Mon compte</a>
-    <div class="logo">RÉSEAU IIA</div>
     <!-- Bloc input + bouton -->
     <form method="get" action="{{ path('search') }}">
         <div style="display: flex; gap: 12px;">
@@ -26,6 +25,16 @@
                     type="submit"
                     style="padding: 12px 24px; font-size: 16px;"
             >Rechercher</button>
+        </div>
+    </form>
+    <!-- logout -->
+    <form method="get" action="{{ path('logout') }}">
+        <div style="display: flex; gap: 12px;">
+            <button
+                    class="form-button"
+                    type="submit"
+                    style="padding: 12px 24px; font-size: 16px;"
+            >Déconnexion</button>
         </div>
     </form>
 </div>
@@ -67,7 +76,14 @@
                 <div class="tweet" style="background: #fff; padding: 20px; border-radius: 10px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); margin-bottom: 15px; border: 1px solid #ddd;">
                     <div class="tweet-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
                         <div class="author" style="font-weight: bold; color: #333;">
-                            <a class="logo" href="http://127.0.0.1:8000/pageperso/{{ tweet.user }}">{{ tweet.user }}</a>
+                            <a class="logo" href="http://127.0.0.1:8000/pageperso/{{ tweet.user }}">
+                                    {% if tweet.profilePicture %}
+                                        <img src="http://localhost:8080/uploads/profile/{{ tweet.profilePicture }}"
+                                            alt="Photo de profil de {{ tweet.user }}"
+                                            style="width: 48px; height: 48px; border-radius: 50%; object-fit: cover; vertical-align: middle;">
+                                    {% endif %}
+                               {{ tweet.user }}
+                            </a>
                         </div>
                         <div class="date" style="font-size: 12px; color: #777;">
                             {{ tweet.createdAt|date('d/m/Y H:i') }}

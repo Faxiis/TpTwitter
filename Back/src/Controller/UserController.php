@@ -44,11 +44,15 @@ class UserController extends AbstractController
         if (!$user)
             return $this->json(['error' => 'Utilisateur introuvable'], 404);
 
+        $baseUrl = $this->getParameter('app.backend_base_url'); // à définir dans services.yaml
+
         $data[] = [
             'id' => $user->getId(),
             'username' => $user->getUsername(),
             'roles' => $user->getRoles(),
-            'profilePicture' => $user->getProfilePicture(),
+            'profilePicture' => $user->getProfilePicture()
+                ? $baseUrl . '/uploads/profile/' . $user->getProfilePicture()
+                : null,
             'createdAt' => $user->getCreatdAt()->format('Y-m-d H:i:s'),
         ];
 
@@ -83,6 +87,11 @@ class UserController extends AbstractController
 
             return new JsonResponse(['success' => true, 'filename' => $filename]);
         } catch (\Throwable $e) {
+            file_put_contents('/tmp/upload_error.log',
+                $e->getMessage() . "\n" . $e->getTraceAsString(),
+                FILE_APPEND
+            );
+
             return new JsonResponse([
                 'success' => false,
                 'error' => 'Erreur serveur : ' . $e->getMessage(),

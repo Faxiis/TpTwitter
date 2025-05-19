@@ -7,6 +7,7 @@
 # config/services.yaml
 parameters:
     profile_pictures_directory: '%kernel.project_dir%/public/uploads/profile'
+    app.backend_base_url: 'http://localhost:8080'
 
 services:
     # default configuration for services in *this* file

@@ -4,6 +4,7 @@ namespace App\Service;
 
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Mime\Part\DataPart;
 use Symfony\Component\Mime\Part\Multipart\FormDataPart;
@@ -410,15 +411,20 @@ class ApiClientService
                 'data' => $response->toArray(),
                 'status' => $response->getStatusCode(),
             ];
-        } catch (ClientExceptionInterface $e) {
-            $response = $e->getResponse();
-            $content = $response->getContent(false);
-            $data = json_decode($content, true);
+        } catch (HttpExceptionInterface|TransportExceptionInterface $e) {
+            $response = $e instanceof HttpExceptionInterface ? $e->getResponse() : null;
+            $status = $response ? $response->getStatusCode() : 0;
+            $rawContent = $response ? $response->getContent(false) : $e->getMessage();
+
+            $data = json_decode($rawContent, true);
+            if (json_last_error() !== JSON_ERROR_NONE) {
+                $data = ['error' => 'Réponse non JSON', 'raw' => $rawContent];
+            }
 
             return [
                 'success' => false,
                 'data' => $data,
-                'status' => $response->getStatusCode(),
+                'status' => $status,
             ];
         }
     }

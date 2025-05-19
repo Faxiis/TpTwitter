@@ -24,6 +24,7 @@ class CompteController extends AbstractController
     {
         $username = $this->requestStack->getSession()->get('username');
         $userTweets = $this->apiClient->getTweetByUsername($username);
+        $user = $this->apiClient->getUserByUsername($username);
 
         // On ne passe que des tableaux de tweets à Twig
         $tweets = [];
@@ -41,6 +42,7 @@ class CompteController extends AbstractController
             'username' => $username,
             'userTweets' => $tweets,
             'tweetError' => $error,
+            'profilePicture' => $user['data'][0]['profilePicture'] ?? null,
         ]);
     }
 

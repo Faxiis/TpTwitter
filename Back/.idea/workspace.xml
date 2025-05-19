@@ -5,14 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5326b0a9-3d45-46e4-9a65-66f9f20ae477" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/Back.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Back.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/services.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/services.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/TweetController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/TweetController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/UserController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../front/src/Controller/AccueilController.php" beforeDir="false" afterPath="$PROJECT_DIR$/../front/src/Controller/AccueilController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../front/src/Controller/CompteController.php" beforeDir="false" afterPath="$PROJECT_DIR$/../front/src/Controller/CompteController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../front/src/Controller/PagePersoController.php" beforeDir="false" afterPath="$PROJECT_DIR$/../front/src/Controller/PagePersoController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../front/src/Service/ApiClientService.php" beforeDir="false" afterPath="$PROJECT_DIR$/../front/src/Service/ApiClientService.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../front/templates/Accueil/Accueil.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/../front/templates/Accueil/Accueil.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../front/templates/Connexion/Connexion.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/../front/templates/Connexion/Connexion.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../front/templates/PagePerso/PagePerso.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/../front/templates/PagePerso/PagePerso.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../front/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/../front/templates/base.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../front/templates/compte/Compte.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/../front/templates/compte/Compte.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -110,6 +114,8 @@
       <path value="$PROJECT_DIR$/vendor/twig/twig" />
       <path value="$PROJECT_DIR$/vendor/symfony/asset" />
       <path value="$PROJECT_DIR$/vendor/symfony/validator" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-intl-idn" />
+      <path value="$PROJECT_DIR$/vendor/symfony/mime" />
     </include_path>
   </component>
   <component name="ProjectColorInfo">{
@@ -156,7 +162,7 @@
       <workItem from="1747208770565" duration="13650000" />
       <workItem from="1747292590922" duration="2595000" />
       <workItem from="1747301274004" duration="11489000" />
-      <workItem from="1747639129955" duration="9747000" />
+      <workItem from="1747639129955" duration="12849000" />
     </task>
     <servers />
   </component>

@@ -6,11 +6,17 @@
   <component name="ChangeListManager">
     <list default="true" id="5326b0a9-3d45-46e4-9a65-66f9f20ae477" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/Version20250513134923.php" beforeDir="false" afterPath="$PROJECT_DIR$/migrations/Version20250519072615.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/Version20250515095957.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/Version20250515101846.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/Version20250515122640.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/TweetController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/TweetController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/UserController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../front/src/Controller/AccueilController.php" beforeDir="false" afterPath="$PROJECT_DIR$/../front/src/Controller/AccueilController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../front/src/Controller/CompteController.php" beforeDir="false" afterPath="$PROJECT_DIR$/../front/src/Controller/CompteController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../front/src/Controller/InscriptionController.php" beforeDir="false" afterPath="$PROJECT_DIR$/../front/src/Controller/InscriptionController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../front/src/Service/ApiClientService.php" beforeDir="false" afterPath="$PROJECT_DIR$/../front/src/Service/ApiClientService.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../front/templates/Accueil/Accueil.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/../front/templates/Accueil/Accueil.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../front/templates/Connexion/Connexion.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/../front/templates/Connexion/Connexion.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../front/templates/compte/Compte.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/../front/templates/compte/Compte.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -154,10 +160,22 @@
       <workItem from="1747208770565" duration="13650000" />
       <workItem from="1747292590922" duration="2595000" />
       <workItem from="1747301274004" duration="11489000" />
+      <workItem from="1747639129955" duration="7461000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>

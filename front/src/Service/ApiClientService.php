@@ -2,7 +2,12 @@
 
 namespace App\Service;
 
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
+use Symfony\Component\Mime\Part\DataPart;
+use Symfony\Component\Mime\Part\Multipart\FormDataPart;
+use Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 class ApiClientService
@@ -220,4 +225,177 @@ class ApiClientService
             ];
         }
     }
+
+    public function getTweetByUsername(): array{
+        try {
+            $response = $this->client->request('GET', 'http://localhost:8080/api/tweet/user/' . $this->requestStack->getSession()->get('username'), [
+                'headers' => [
+                    'Authorization' => 'Bearer ' . $this->requestStack->getSession()->get('jwt_token'),
+                ],
+            ]);
+
+            return [
+                'success' => true,
+                'data' => $response->toArray(),
+            ];
+        } catch (\Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface $e) {
+            $response = $e->getResponse();
+            $content = $response->getContent(false);
+            $data = json_decode($content, true);
+
+            return [
+                'success' => false,
+                'data' => $data,
+                'status' => $response->getStatusCode(),
+            ];
+        }
+    }
+
+    public function createTweet(string $content): array
+    {
+        $jwt = $this->requestStack->getSession()->get('jwt_token');
+
+        if (!$jwt) {
+            return [
+                'success' => false,
+                'message' => 'Utilisateur non authentifié.',
+            ];
+        }
+
+        try {
+            $response = $this->client->request('POST', 'http://localhost:8080/api/tweet', [
+                'headers' => [
+                    'Authorization' => 'Bearer ' . $jwt,
+                ],
+                'json' => [
+                    'content' => $content,
+                ],
+            ]);
+
+            $data = $response->toArray(false);
+
+            return [
+                'success' => true,
+                'data' => $data,
+            ];
+        } catch (\Exception $e) {
+            return [
+                'success' => false,
+                'message' => 'Erreur inattendue : ' . $e->getMessage(),
+            ];
+        }
+    }
+
+    public function deleteTweet(int $id){
+        $jwt = $this->requestStack->getSession()->get('jwt_token');
+
+        if (!$jwt) {
+            return [
+                'success' => false,
+                'message' => 'Utilisateur non authentifié.',
+            ];
+        }
+
+        try {
+            $response = $this->client->request('DELETE', 'http://localhost:8080/api/tweet/' . $id, [
+                'headers' => [
+                    'Authorization' => 'Bearer ' . $jwt,
+                ],
+            ]);
+
+            $data = $response->toArray(false);
+
+            return [
+                'success' => true,
+                'data' => $data,
+            ];
+        } catch (\Exception $e) {
+            return [
+                'success' => false,
+                'message' => 'Erreur inattendue : ' . $e->getMessage(),
+            ];
+        }
+    }
+
+
+    public function uploadProfilePicture(\Symfony\Component\HttpFoundation\File\UploadedFile $file): array
+    {
+        $boundary = uniqid();
+        $eol = "\r\n";
+
+        $filename = $file->getClientOriginalName();
+        $mimeType = $file->getMimeType();
+        $fileContents = file_get_contents($file->getPathname());
+
+        dd($filename, $mimeType, $fileContents, $file->getPathname(), $file->getClientOriginalExtension(), $file->getSize(), $file->getError());
+
+        $body =
+            "--$boundary$eol" .
+            "Content-Disposition: form-data; name=\"profile_picture\"; filename=\"$filename\"$eol" .
+            "Content-Type: $mimeType$eol$eol" .
+            $fileContents . $eol .
+            "--$boundary--$eol";
+
+        $headers = [
+            'Authorization' => 'Bearer ' . $this->requestStack->getSession()->get('jwt_token'),
+            'Content-Type' => 'multipart/form-data; boundary=' . $boundary,
+        ];
+
+        try {
+            $response = $this->client->request('POST', 'http://localhost:8080/api/user/pp', [
+                'headers' => $headers,
+                'body' => $body,
+            ]);
+
+            return [
+                'success' => true,
+                'data' => $response->toArray(),
+            ];
+        } catch (\Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface $e) {
+            $response = $e->getResponse();
+            $content = $response->getContent(false);
+            $data = json_decode($content, true);
+
+            return [
+                'success' => false,
+                'data' => $data,
+                'status' => $response->getStatusCode(),
+            ];
+        }
+    }
+
+    public function uploadFile(string $url, UploadedFile $file): array
+    {
+        $formData = new FormDataPart([
+            'profile_picture' => DataPart::fromPath($file->getPathname(), $file->getClientOriginalName()),
+        ]);
+
+        $headers = array_merge([
+            'Authorization' => 'Bearer ' . $this->requestStack->getSession()->get('jwt_token'),
+        ], $formData->getPreparedHeaders()->toArray());
+
+        try {
+            $response = $this->client->request('POST', $url, [
+                'headers' => $headers,
+                'body' => $formData->bodyToIterable(),
+            ]);
+
+            return [
+                'success' => true,
+                'data' => $response->toArray(),
+                'status' => $response->getStatusCode(),
+            ];
+        } catch (ClientExceptionInterface $e) {
+            $response = $e->getResponse();
+            $content = $response->getContent(false);
+            $data = json_decode($content, true);
+
+            return [
+                'success' => false,
+                'data' => $data,
+                'status' => $response->getStatusCode(),
+            ];
+        }
+    }
+
 }

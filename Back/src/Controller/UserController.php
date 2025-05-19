@@ -58,24 +58,36 @@ class UserController extends AbstractController
     #[Route('/api/user/pp', name: 'api_upload_profile_picture', methods: ['POST'])]
     public function uploadPicture(Request $request): JsonResponse
     {
-        $file = $request->files->get('profile_picture');
+        try {
+            $file = $request->files->get('profile_picture');
 
-        if (!$file) {
-            return new JsonResponse(['error' => 'Aucun fichier envoyé'], 400);
+            if (!$file) {
+                return new JsonResponse(['error' => 'Aucun fichier envoyé'], 400);
+            }
+
+            if (!in_array($file->getMimeType(), ['image/jpeg', 'image/png'])) {
+                return new JsonResponse(['error' => 'Format non supporté, veuillez importer un fichier .jpeg ou .png'], 400);
+            }
+
+            $filename = uniqid() . '.' . $file->guessExtension();
+            $file->move($this->getParameter('profile_pictures_directory'), $filename);
+
+            // Met à jour l'utilisateur (par exemple)
+            $user = $this->getUser(); // ou récupère depuis JWT
+            if (!$user) {
+                return new JsonResponse(['error' => 'Utilisateur non authentifié'], 401);
+            }
+
+            $user->setProfilePicture($filename);
+            $this->em->flush();
+
+            return new JsonResponse(['success' => true, 'filename' => $filename]);
+        } catch (\Throwable $e) {
+            return new JsonResponse([
+                'success' => false,
+                'error' => 'Erreur serveur : ' . $e->getMessage(),
+                'trace' => $e->getTraceAsString(),
+            ], 500);
         }
-
-        if (!in_array($file->getMimeType(), ['image/jpeg', 'image/png'])) {
-            return new JsonResponse(['error' => 'Format non supporté, veuillez importer un fichier .jpeg ou .png'], 400);
-        }
-
-        $filename = uniqid() . '.' . $file->guessExtension();
-        $file->move($this->getParameter('profile_pictures_directory'), $filename);
-
-        // Met à jour l'utilisateur (par exemple)
-        $user = $this->getUser(); // ou récupère depuis JWT
-        $user->setProfilePicture($filename);
-        $this->em->flush();
-
-        return new JsonResponse(['success' => true, 'filename' => $filename]);
     }
 }

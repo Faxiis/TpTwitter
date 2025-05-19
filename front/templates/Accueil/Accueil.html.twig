@@ -26,7 +26,7 @@
 
 {% block body %}
 <div class="header">
-    <a href="http://127.0.0.1:8000/Compte/{{ username }}">Mon compte</a>
+    <a href="http://127.0.0.1:8000/Compte">Mon compte</a>
     <div class="logo">RÉSEAU IIA</div>
     <!-- Bloc input + bouton -->
     <form method="get" action="{{ path('search') }}">
@@ -50,6 +50,20 @@
 
     <!-- Conteneur principal -->
     <div class="main-container" style="max-width: 700px; margin: 40px auto;">
+
+        <!-- Zone de publication de tweet -->
+        <div class="new-tweet" style="background-color: #fff; padding: 20px; border-radius: 10px; box-shadow: 0 1px 4px rgba(0,0,0,0.1); margin-bottom: 15px;">
+            <form method="post" action="{{ path('create_tweet') }}">
+            <textarea name="content" placeholder="Quoi de neuf ?" rows="3" maxlength="280"
+                  style="width: 100%; border: 1px solid #ccc; border-radius: 6px; padding: 12px; font-size: 16px; resize: none;"></textarea>
+                <div style="text-align: right; margin-top: 5px;">
+                    <button type="submit" style="background-color: #1DA1F2; color: white; padding: 10px 20px; border: none; border-radius: 6px; font-weight: bold; cursor: pointer;">
+                        Tweeter
+                    </button>
+                </div>
+            </form>
+        </div>
+
 
         <!-- Bloc bleu -->
         <div style="background-color: #aed2ff; color: black; padding: 25px; border-radius: 10px;">

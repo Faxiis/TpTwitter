@@ -48,6 +48,28 @@ class AccueilController extends AbstractController
         ]);
     }
 
+    #[Route('/tweet', name: 'create_tweet', methods: ['POST'])]
+    public function createTweet(Request $request): Response
+    {
+        $content = trim($request->request->get('content'));
+
+        if (empty($content)) {
+            $this->addFlash('error', 'Le tweet ne peut pas être vide.');
+            return $this->redirectToRoute('app_Compte');
+        }
+        $result = $this->apiClient->createTweet($content);
+
+        if (!$result['success']) {
+            $message = $result['data']['errors'][0] ?? $result['message'] ?? 'Une erreur est survenue.';
+            $this->addFlash('error', $message);
+        } else {
+            $this->addFlash('success', 'Tweet publié avec succès.');
+        }
+
+        return $this->redirectToRoute('app_accueil');
+    }
+
+
     #[Route('/search', name: 'search')]
     public function search(Request $request): Response
     {

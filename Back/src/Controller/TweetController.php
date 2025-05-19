@@ -24,7 +24,7 @@ class TweetController extends AbstractController
     #[Route('/api/tweet', name: 'app_tweet_all', methods: ['GET'])]
     public function getAll(): JsonResponse
     {
-        $tweets = $this->tweetRepository->findAll();
+        $tweets = $this->tweetRepository->findBy([], ['created_at' => 'DESC']);
 
         if (!$tweets)
             return $this->json(['error' => 'Aucun tqeet trouvé'], 404);
@@ -60,11 +60,11 @@ class TweetController extends AbstractController
         return $this->json($data);
     }
 
-    #[Route('/api/tweet/user/{userId}', name: 'app_tweet_by_user', methods: ['GET'])]
-    public function getByUserId(int $userId): JsonResponse
+    #[Route('/api/tweet/user/{username}', name: 'app_tweet_by_user', methods: ['GET'])]
+    public function getByUsername(string $username): JsonResponse
     {
         // Récupération de l'utilisateur
-        $user = $this->userRepository->find($userId);
+        $user = $this->userRepository->findOneBy(['username' => $username]);
         if (!$user)
             return $this->json(['error' => 'Utilisateur introuvable'], 404);
 

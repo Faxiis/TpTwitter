@@ -4,16 +4,30 @@
 
 {% block stylesheets %}
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const container = document.getElementById('flash-messages-container');
+            const messages = document.querySelectorAll('.flash-message');
+
+            messages.forEach(msg => {
+                msg.style.display = 'block';
+                container.appendChild(msg);
+
+                // Auto hide après 4 secondes
+                setTimeout(() => {
+                    msg.style.opacity = '0';
+                    setTimeout(() => msg.remove(), 500);
+                }, 4000);
+            });
+        });
+    </script>
 {% endblock %}
 
 {% block body %}
 <div class="header">
+    <a href="http://127.0.0.1:8000/Compte/{{ username }}">Mon compte</a>
     <div class="logo">RÉSEAU IIA</div>
-    <div class="date">
-        {% set jours = ['dimanche', 'lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi'] %}
-        {% set mois = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'] %}
-        {{ jours[date().format('w')]|capitalize }} {{ date().format('d') }} {{ mois[date().format('n') - 1]|capitalize }} {{ date().format('Y') }}
-    </div>
     <!-- Bloc input + bouton -->
     <form method="get" action="{{ path('search') }}">
         <div style="display: flex; gap: 12px;">

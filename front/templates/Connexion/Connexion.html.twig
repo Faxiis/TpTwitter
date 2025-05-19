@@ -64,14 +64,14 @@
 
 
     <div id="flash-messages-container" style="position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); z-index: 9999;">
-
         {% for label, messages in app.flashes %}
             {% for message in messages %}
-                <div class="flash-message" style="padding: 12px 24px; margin-top: 8px; border-radius: 6px; color: white; font-weight: 600; min-width: 300px; box-shadow: 0 2px 6px rgba(0,0,0,0.2);">
-                    {{ message }}
+                <div style="background-color: #2196F3; padding: 12px 24px; margin-top: 8px; border-radius: 6px; color: white; font-weight: 600; min-width: 300px; box-shadow: 0 2px 6px rgba(0,0,0,0.2);">
+                    <div class="flash-{{ label }}">
+                        {{ message }}
+                    </div>
                 </div>
             {% endfor %}
         {% endfor %}
-
     </div>
 {% endblock %}

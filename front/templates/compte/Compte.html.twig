@@ -8,26 +8,11 @@
 
 {% block body %}
 <div class="header">
-    <div class="logo">RÉSEAU IIA</div>
-    <div class="date">
-        {% set jours = ['dimanche', 'lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi'] %}
-        {% set mois = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'] %}
-        {{ jours[date().format('w')]|capitalize }} {{ date().format('d') }} {{ mois[date().format('n') - 1]|capitalize }} {{ date().format('Y') }}
-    </div>
-    <div class="auth-buttons">
-        <a href="{{ path('app_Connexion') }}">
-            <button class="btn">Se connecter</button>
-        </a>
-        <a href="{{ path('app_Inscription') }}">
-            <button class="btn">Inscription</button>
-        </a>
-    </div>
+    <a class="logo" href="http://127.0.0.1:8000/accueil">RÉSEAU IIA</a>
 </div>
 
-<div class="example-wrapper">
-    <h1>Mon Compte</h1>
-
-    <div class="form-wrapper">
+<div class="example-wrapper form-wrapper">
+    <h2 class="form-titles">Bonjour {{ username }} !</h2>
         <h2>Mettre à jour ma photo de profil</h2>
 
         <form method="POST" action="#" enctype="multipart/form-data">
@@ -37,6 +22,5 @@
             </div>
             <button type="submit">Enregistrer</button>
         </form>
-    </div>
 </div>
 {% endblock %}

@@ -9,8 +9,31 @@ class ApiClientService
 {
     public function __construct(
         private HttpClientInterface $client,
-        private RequestStack $requestStack
+        private RequestStack $requestStack,
     ) {}
+
+    public function decodeJwtPayload(string $jwt): ?array
+    {
+        $parts = explode('.', $jwt);
+        if (count($parts) !== 3) {
+            return null; // JWT invalide
+        }
+
+        $payload = $parts[1];
+        // Base64URL decode (remplace les caractères et ajoute le padding)
+        $payload = strtr($payload, '-_', '+/');
+        $padding = strlen($payload) % 4;
+        if ($padding > 0) {
+            $payload .= str_repeat('=', 4 - $padding);
+        }
+
+        $json = base64_decode($payload);
+        if ($json === false) {
+            return null;
+        }
+
+        return json_decode($json, true);
+    }
 
     public function login(string $username, string $password): array
     {
@@ -27,6 +50,13 @@ class ApiClientService
             if (!empty($data['token'])) {
                 // Stocker le token seulement s’il est présent
                 $this->requestStack->getSession()->set('jwt_token', $data['token']);
+                // Décoder le payload du JWT pour récupérer l'ID et le nom d'utilisateur
+                $payload = $this->decodeJwtPayload($data['token']);
+                if ($payload) {
+                    if (isset($payload['username'])) {
+                        $this->requestStack->getSession()->set('username', $payload['username']);
+                    }
+                }
 
                 return [
                     'success' => true,
@@ -86,7 +116,6 @@ class ApiClientService
             ];
         }
     }
-
 
     public function getTweets(): array
     {

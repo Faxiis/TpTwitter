@@ -9,11 +9,12 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class CompteController extends AbstractController
 {
-    #[Route('/Compte', name: 'app_Compte')]
-    public function index(Request $request): Response
+    #[Route('/Compte/{username}', name: 'app_Compte')]
+    public function index(string $username): Response
     {
         return $this->render('Compte/Compte.html.twig', [
             'controller_name' => 'CompteController',
+            'username' => $username,
         ]);
     }
 }

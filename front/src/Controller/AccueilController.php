@@ -21,6 +21,7 @@ class AccueilController extends AbstractController
     public function index(): Response
     {
         $jwt = $this->requestStack->getSession()->get('jwt_token');
+        $username = $this->requestStack->getSession()->get('username');
         // Optionnel : vérifie si c'est un token valide (ou si c'est juste une ancienne valeur)
         if (!$jwt || $jwt === '401') {
             return $this->redirectToRoute('app_Connexion');
@@ -43,6 +44,7 @@ class AccueilController extends AbstractController
             'tweets' => $tweets,
             'errorMessage' => $errorMessage,
             'users' => $users['data'],
+            'username' => $username,
         ]);
     }
 

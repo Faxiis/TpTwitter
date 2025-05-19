@@ -75,7 +75,6 @@ class AccueilController extends AbstractController
         return $this->redirectToRoute('app_accueil');
     }
 
-
     #[Route('/search', name: 'search')]
     public function search(Request $request): Response
     {

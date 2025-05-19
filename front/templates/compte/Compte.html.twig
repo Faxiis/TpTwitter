@@ -10,7 +10,7 @@
 <div class="header">
     <a class="logo" href="http://127.0.0.1:8000/accueil">RÉSEAU IIA</a>
     <!-- logout -->
-    <form method="get" action="{{ path('logout') }}">
+    <form method="POST" action="{{ path('logout') }}">
         <div style="display: flex; gap: 12px;">
             <button
                     class="form-button"

@@ -22,7 +22,14 @@ class CompteController extends AbstractController
     #[Route('/Compte', name: 'app_Compte')]
     public function index(): Response
     {
+        $jwt = $this->requestStack->getSession()->get('jwt_token');
         $username = $this->requestStack->getSession()->get('username');
+
+        // Optionnel : vérifie si c'est un token valide (ou si c'est juste une ancienne valeur)
+        if (!$jwt || $jwt === '401' || $username == null) {
+            return $this->redirectToRoute('app_Connexion');
+        }
+
         $userTweets = $this->apiClient->getTweetByUsername($username);
         $user = $this->apiClient->getUserByUsername($username);
 
